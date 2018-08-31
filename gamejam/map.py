@@ -60,9 +60,9 @@ class Map(object):
         self._racks[3].get_sprite("rack1")
         self._racks[7].get_sprite("rack1")
         self._providers = [
-            RAMProvider(0, 223-self._offset_y),
-            CPUProvider(32, 223-self._offset_y),
-            CaseProvider(64, 223-self._offset_y),
+            RAMProvider(8, 223-self._offset_y),
+            CPUProvider(40, 223-self._offset_y),
+            CaseProvider(72, 223-self._offset_y),
         ]
         self._tables = [
             Table(133, 223-self._offset_y),
