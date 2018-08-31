@@ -11,12 +11,13 @@ import os
 import pyxel
 
 SPRITESHEET_IMAGE = 0
-SPRITESHEET_MASK = 7
 
 
 class SpriteSheet(object):
     """ A singleton class that handles sprites
     """
+    _sprites = {}
+
     def __new__(cls):
         """ Singleton.
         """
@@ -39,6 +40,12 @@ class SpriteSheet(object):
 
         self.initialized = True
 
+    def add_sprite(self, name, sprite):
+        self._sprites[name] = sprite
+
+    def get_sprite(self, name):
+        return self._sprites[name]
+
     def __getitem__(self, key):
         try:
             return getattr(self, key)
@@ -59,15 +66,16 @@ class SpriteSheet(object):
 
 
 class Sprite(object):
-    def __init__(self, x, y, w, h):
+    def __init__(self, x, y, w, h, mask):
         self._x = x
         self._y = y
         self._w = w
         self._h = h
+        self._mask = mask
 
     def render(self):
         return SPRITESHEET_IMAGE, self._x, self._y, \
-                self._w, self._h, SPRITESHEET_MASK
+                self._w, self._h, self.mask
 
 
 class Hitbox(object):
@@ -87,16 +95,10 @@ class Hitbox(object):
 
 
 class Item(object):
-    def __init__(self, sprite):
-        """Basic Game Element
+    sprite = None
 
-        Arguments:
-            * x, y, w, h: x, y, width, height
-            * spritesheet: a SpriteSheet object
-            * sx, sy: the coords, in multiple of w and h in the spritesheet
-        """
-        # Sprite sheet rendering
-        self.sprite = sprite
+    def get_sprite(self, name):
+        self.sprite = SpriteSheet().get_sprite(name)
 
     def copy(self):
         # Return a copy of this element to predict movements
@@ -108,7 +110,7 @@ class Item(object):
 
 
 class Element(Item):
-    def __init__(self, x, y, w, h, sprite):
+    def __init__(self, x, y, w, h):
         """Basic Game Element
 
         Arguments:
@@ -123,9 +125,6 @@ class Element(Item):
 
         # The element hitbox
         self.hitbox = Hitbox(x, y, w, h)
-
-        # Sprite sheet rendering
-        Item.__init__(self, sprite)
 
     def draw(self):
         Item.draw(self, self.x, self.y)
