@@ -54,14 +54,16 @@ class Order(object):
         self._server.draw(x+14, y+3)
 
         #cpu
-        #pyxel.rect(x+33, y+5, x+44, y+16, ICO_BG_COLOR)
-        self._cpuitem.draw(x+31, y+3)
-        pyxel.text(x+44, y+14, str(self._server._cpu), TXT_COLOR)
+        if self._server._cpu:
+            #pyxel.rect(x+33, y+5, x+44, y+16, ICO_BG_COLOR)
+            self._cpuitem.draw(x+31, y+3)
+            pyxel.text(x+44, y+14, str(self._server._cpu), TXT_COLOR)
 
         #ram
-        #pyxel.rect(x+47, y+5, x+58, y+16, ICO_BG_COLOR)
-        self._ramitem.draw(x+46, y+3)
-        pyxel.text(x+58, y+14, str(self._server._ram), TXT_COLOR)
+        if self._server._ram:
+            #pyxel.rect(x+47, y+5, x+58, y+16, ICO_BG_COLOR)
+            self._ramitem.draw(x+46, y+3)
+            pyxel.text(x+58, y+14, str(self._server._ram), TXT_COLOR)
 
 
 class ScoreBoard(object):
