@@ -7,7 +7,7 @@ Copyrights 2018 by Fullsave
 """
 
 from .misc import Element
-from .server import RAM, CPU, Case
+from .server import RAM, CPU, Server
 
 
 class Provider(Element):
@@ -43,7 +43,7 @@ class CPUProvider(Provider):
 
 
 class CaseProvider(Provider):
-    item_class = Case
+    item_class = Server
 
     def __init__(self, x, y, w, h):
         Provider.__init_(self, x, y, w, h)
