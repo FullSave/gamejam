@@ -43,7 +43,15 @@ class Map(object):
         self._racks = [
             Rack(0, 0, 32, 32, "1"),
             Rack(32, 0, 32, 32, "2"),
+            Rack(64, 0, 32, 32, "3"),
+            Rack(96, 0, 32, 32, "4"),
+            Rack(0, 64, 32, 32, "5"),
+            Rack(32, 64, 32, 32, "6"),
+            Rack(64, 64, 32, 32, "7"),
+            Rack(96, 64, 32, 32, "8"),
         ]
+        self._racks[3].get_sprite("rack1")
+        self._racks[7].get_sprite("rack1")
         self._providers = []
         self._tables = []
 
