@@ -39,9 +39,18 @@ class Player(Element):
         if dx != 0 and dy != 0:
             smoothness_x, smoothness_y = self._diagonal_move
 
+        self.move_direction(smoothness_x * dx, 0)
+        self.move_direction(0, smoothness_y * dy)
+
+    def move_direction(self, dx, dy):
+        # Only move on direction, to allow "slipping" against obstacles
+        if dx != 0 and dy != 0:
+            self.move_direction(dx, 0)
+            self.move_direction(0, dy)
+
         new_self = self.copy()
-        new_self.x += smoothness_x * dx
-        new_self.y += smoothness_y * dy
+        new_self.x += dx
+        new_self.y += dy
 
         # Map limits
         if new_self.x + self.hitbox.x < 0:
