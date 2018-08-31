@@ -10,9 +10,9 @@ import os
 
 import pyxel
 
-from map import Map
-from misc import SPRITESHEET_IMAGE
-from scoreboard import ScoreBoard
+from .map import Map
+from .misc import SPRITESHEET_IMAGE
+from .scoreboard import ScoreBoard
 
 
 class Menu(object):
