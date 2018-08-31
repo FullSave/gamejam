@@ -9,6 +9,8 @@ Copyrights 2018 by Fullsave
 import os
 
 import pyxel
+
+from map import Map
 from scoreboard import ScoreBoard
 
 
@@ -22,7 +24,7 @@ class Menu(object):
         assets = os.path.join(os.path.dirname(__file__), 'assets')
         pyxel.image(0).load(0, 0, os.path.join(assets, 'spritesheet.png'))
 
-        self.map = None
+        self.map = Map()
         self.scoreboard = ScoreBoard(self.map)
 
         pyxel.run(self.update, self.draw)
@@ -39,6 +41,7 @@ class Menu(object):
         self.scoreboard.draw()
 
         # Draw Map
+        self.map.draw()
 
 
 if __name__ == '__main__':
