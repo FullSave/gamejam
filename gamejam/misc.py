@@ -35,7 +35,7 @@ class SpriteSheet(object):
             return
 
         assets = os.path.join(os.path.dirname(__file__), 'assets')
-        pyxel.image(self.image).load(
+        pyxel.image(SPRITESHEET_IMAGE).load(
                 0, 0, os.path.join(assets, 'spritesheet.png'))
 
         self.initialized = True
@@ -104,9 +104,9 @@ class Item(object):
         # Return a copy of this element to predict movements
         return Item(self.sprite)
 
-    def draw(self, x, y):
+    def draw(self, x, y, offset_x, offset_y):
         # Drawn the sprite at the element coords
-        pyxel.blt(x, y, *self.sprite.render())
+        pyxel.blt(x + offset_x, y + offset_y, *self.sprite.render())
 
 
 class Element(Item):
@@ -126,15 +126,12 @@ class Element(Item):
         # The element hitbox
         self.hitbox = Hitbox(x, y, w, h)
 
-    def draw(self):
-        Item.draw(self, self.x, self.y)
+    def draw(self, offset_x, offset_y):
+        Item.draw(self, self.x, self.y, offset_x, offset_x)
 
     def copy(self):
         # Return a copy of this element to predict movements
-        return Element(
-                self.x, self.y, self.w, self.h,
-                self.spritesheet, self.sx, self.sy
-        )
+        return Element(self.x, self.y, self.w, self.h)
 
     def is_colliding(self, element):
         # Is this element colliding with element
