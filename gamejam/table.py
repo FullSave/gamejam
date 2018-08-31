@@ -30,5 +30,10 @@ class Table(Element):
 
             self._server = item
 
-        else:
+        elif item is not None:
             self._server.interact(item)
+
+        else:
+            server = self._server
+            self._server = None
+            return server
