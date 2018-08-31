@@ -23,7 +23,7 @@ class Menu(object):
         # Load sprites
         SpriteSheet().add_sprite("cpu", Sprite(0, 0, 16, 16, 7))
         SpriteSheet().add_sprite("ram", Sprite(16, 0, 16, 16, 7))
-        SpriteSheet().add_sprite("case", Sprite(32, 0, 16, 16, 7))
+        SpriteSheet().add_sprite("server", Sprite(32, 0, 16, 16, 7))
         SpriteSheet().add_sprite('wall', Sprite(48, 0, 8, 8, 7))
         SpriteSheet().add_sprite("rack0", Sprite(0, 16, 32, 32, 7))
         SpriteSheet().add_sprite("rack1", Sprite(32, 16, 32, 32, 7))
