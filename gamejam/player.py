@@ -65,34 +65,42 @@ class Player(Element):
     def interact(self):
         near_element = None
 
+        sx1 = self.x + self.hitbox.x
+        sx2 = self.x + self.hitbox.x2
+        sy1 = self.y + self.hitbox.y
+        sy2 = self.y + self.hitbox.y2
+
         # Elements the player must be above
         for element in self._map.providers + self._map.tables:
-            if self.hitbox.x > element.hitbox.x and \
-                    self.hitbox.x2 < element.hitbox.x2 and \
-                    self.hitbox.y2 < element.hitbox.y and \
-                    self.hitbox.y2 > element.hitbox.y - 8:
+            ex1 = element.x + element.hitbox.x
+            ex2 = element.x + element.hitbox.x2
+            ey1 = element.y + element.hitbox.y
+            ey2 = element.y + element.hitbox.y2
+
+            if sx1 >= ex1 and sx2 <= ex2 and sy2 <= ey1 and sy2 >= ey1 - 8:
                 near_element = element
                 break
+
+        print(near_element, near_element is None)
 
         if near_element is None:
             # Elements the player must be below
             for element in self._map.racks:
-                if self.hitbox.x > element.hitbox.x and \
-                        self.hitbox.x2 < element.hitbox.x2 and \
-                        self.hitbox.y > element.hitbox.y2 and \
-                        self.hitbox.y < element.hitbox.y2 + 8:
+                ex1 = element.x + element.hitbox.x
+                ex2 = element.x + element.hitbox.x2
+                ey1 = element.y + element.hitbox.y
+                ey2 = element.y + element.hitbox.y2
+                if sx1 >= ex1 and sx2 <= ex2 and sy1 >= ey2 and sy1 <= ey2 + 8:
                     near_element = element
                     break
 
-        near_element = self._map.racks[0]
-
         if issubclass(near_element.__class__, Provider):
             try:
-                near_element.interact()
+                self.item = near_element.interact()
             except ValueError:
                 print("Invalid item in hands")
         elif isinstance(near_element, Table) or isinstance(near_element, Rack):
             try:
-                near_element.interact(self._item)
+                self.item = near_element.interact(self._item)
             except ValueError:
                 print("Invalid item in hands")

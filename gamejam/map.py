@@ -124,7 +124,7 @@ class Map(object):
             move_x = -speed
         elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
             move_x = speed
-        elif pyxel.btn(pyxel.KEY_SPACE):
+        elif pyxel.btnp(pyxel.KEY_SPACE):
             self._player.interact()
 
         if move_x != 0 or move_y != 0:

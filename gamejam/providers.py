@@ -21,7 +21,7 @@ class Provider(Element):
             raise RuntimeError("Provider class must be inherited")
 
         else:
-            return self.item_class(self.spritesheet)
+            return self.item_class()
 
 
 class RAMProvider(Provider):
