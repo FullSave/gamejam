@@ -6,6 +6,9 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
+import pyxel
+
+from .player import Player
 from .wall import Wall
 
 
@@ -40,14 +43,47 @@ class Map(object):
         self._providers = []
         self._tables = []
 
-        # self._player = None
+        self._player = Player(self, 0, 0, 16, 32)
+
+    @property
+    def walls(self):
+        return self._walls
+
+    @property
+    def racks(self):
+        return self._racks
+
+    @property
+    def providers(self):
+        return self._providers
+
+    @property
+    def tables(self):
+        return self._tables
+
+    @property
+    def player(self):
+        return self._player
 
     def update(self):
-        pass
+        # Move player
+        move_x = move_y = 0
+        speed = 2
+
+        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W):
+            move_y = -speed
+        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
+            move_y = speed
+        elif pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_A):
+            move_x = -speed
+        elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
+            move_x = speed
+
+        self._player.move(move_x, move_y)
 
     def draw(self):
         entities = self._walls + self._racks + self._providers + self._tables
         for entity in entities:
             entity.draw(self._offset_x, self._offset_y)
 
-        # self._player.draw(self._offset_x, self._offset_y)
+        self._player.draw(self._offset_x, self._offset_y)
