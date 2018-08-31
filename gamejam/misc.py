@@ -12,8 +12,8 @@ import pyxel
 class SpriteSheet(object):
     def __init__(self, image, path, w, h, mask=0):
         self._image = image
-        self.w = w
-        self.h = h
+        self._w = w
+        self._h = h
         self._mask = mask
 
     def render(self, x, y, mask=None):
