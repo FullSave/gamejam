@@ -14,7 +14,7 @@ class Player(Element):
         Element.__init__(self, x, y, w, h)
 
         # Sprite loading
-        self.get_sprite("player")
+        self.get_sprite("player_left0")
 
         # Carried item
         self._item = None

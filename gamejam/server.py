@@ -21,7 +21,7 @@ class CPU(Item):
 
 class Server(Item):
     def __init__(self, ram=0, cpu=0):
-        self._get_sprite("server")
+        self.get_sprite("server")
 
         self._ram = ram
         self._cpu = cpu
