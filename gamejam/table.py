@@ -18,6 +18,11 @@ class Table(Element):
 
         self._server = None
 
+    def draw(self, offset_x=0, offset_y=0):
+        Element.draw(self, offset_x, offset_y)
+        if self._server is not None:
+            self._server.draw(self.x + 8, self.y + 3, offset_x, offset_y)
+
     def interact(self, item):
         """ Interaction with the table
 
