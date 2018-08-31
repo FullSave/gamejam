@@ -9,6 +9,7 @@ Copyrights 2018 by Fullsave
 import os
 
 import pyxel
+from scoreboard import ScoreBoard
 
 
 class Menu(object):
@@ -21,6 +22,9 @@ class Menu(object):
         assets = os.path.join(os.path.dirname(__file__), 'assets')
         # pyxel.image(0).load(0, 0, os.path.join(assets, 'logo.png')) 
 
+        self.map = None
+        self.scoreboard = ScoreBoard(self.map)
+
         pyxel.run(self.update, self.draw)
 
     def update(self):
@@ -32,6 +36,7 @@ class Menu(object):
         pyxel.cls(0)
 
         # Draw UI
+        self.scoreboard.draw()
 
         # Draw Map
 
