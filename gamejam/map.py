@@ -29,12 +29,12 @@ class Map(object):
             Wall(160, 0, 8, 136),
 
             # providers room
-            Wall(0, 160, 80, 8),
-            Wall(112, 160, 8, 72),
+            Wall(0, 168, 80, 8),
+            Wall(112, 168, 8, 64),
 
             # table room
-            Wall(154, 160, 56, 8),
-            Wall(210, 160, 8, 72),
+            Wall(154, 168, 56, 8),
+            Wall(210, 168, 8, 64),
 
             # network room
             Wall(208, 128, 48, 8),
@@ -55,7 +55,7 @@ class Map(object):
         self._providers = []
         self._tables = []
 
-        self._player = Player(self, 0, 0, 16, 32)
+        self._player = Player(self, 32, 120)
 
     @property
     def walls(self):
@@ -95,7 +95,8 @@ class Map(object):
         elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
             move_x = speed
 
-        self._player.move(move_x, move_y)
+        if move_x != 0 or move_y != 0:
+            self._player.move(move_x, move_y)
 
     def draw(self):
         for element in self.elements:

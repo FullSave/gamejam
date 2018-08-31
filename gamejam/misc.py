@@ -126,13 +126,14 @@ class Item(object):
 
 
 class Element(Item):
-    def __init__(self, x, y, w, h):
+    def __init__(self, x, y, w, h, hitbox=None):
         """Basic Game Element
 
         Arguments:
             * x, y, w, h: x, y, width, height
             * spritesheet: a SpriteSheet object
             * sx, sy: the coords, in multiple of w and h in the spritesheet
+            * hitbox: set a custom hitbox or use the default one
         """
         self.x = x
         self.y = y
@@ -140,18 +141,18 @@ class Element(Item):
         self.h = h
 
         # The element hitbox
-        self.hitbox = Hitbox(x, y, w, h)
+        self.hitbox = Hitbox(0, 0, w, h) if hitbox is None else hitbox
 
     def draw(self, offset_x=0, offset_y=0):
         Item.draw(self, self.x, self.y, offset_x, offset_y)
 
     def copy(self):
         # Return a copy of this element to predict movements
-        return Element(self.x, self.y, self.w, self.h)
+        return Element(self.x, self.y, self.w, self.h, self.hitbox)
 
     def is_colliding(self, element):
         # Is this element colliding with element
-        return self.hitbox.x < element.hitbox.x2 and \
-               self.hitbox.x2 > element.hitbox.x and \
-               self.hitbox.y < element.hitbox.y2 and \
-               self.hitbox.y2 > element.hitbox.y
+        return self.x + self.hitbox.x < element.x + element.hitbox.x2 and \
+               self.x + self.hitbox.x2 > element.x + element.hitbox.x and \
+               self.y + self.hitbox.y < element.y + element.hitbox.y2 and \
+               self.y + self.hitbox.y2 > element.y + element.hitbox.y
