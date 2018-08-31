@@ -6,6 +6,7 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
+import pyxel
 from .misc import Item
 
 
@@ -25,6 +26,28 @@ class Server(Item):
 
         self._ram = ram
         self._cpu = cpu
+
+    @property
+    def is_racked(self):
+        return False  # FIXME
+
+    def draw(self, x, y, offset_x=0, offset_y=0):
+        Item.draw(self, x, y, offset_x, offset_y)
+        if self.is_racked:
+            pyxel.pix(x + offset_x + 1, y + offset_y + 7, 11)
+        if self._cpu >= 1:
+            pyxel.line(x + offset_x + 5, y + offset_y + 7,
+                       x + offset_x + 5, y + offset_y + 8, 13)
+        if self._cpu >= 2:
+            pyxel.line(x + offset_x + 7, y + offset_y + 7,
+                       x + offset_x + 7, y + offset_y + 8, 13)
+        if self._ram >= 1:
+            pyxel.line(x + offset_x + 11, y + offset_y + 7,
+                       x + offset_x + 11, y + offset_y + 8, 3)
+        if self._ram >= 2:
+            pyxel.line(x + offset_x + 13, y + offset_y + 7,
+                       x + offset_x + 13, y + offset_y + 8, 3)
+
 
     def interact(self, Item):
         """ Interaction with the server
