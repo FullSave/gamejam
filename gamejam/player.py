@@ -40,6 +40,11 @@ class Player(Element):
         self._direction = direction
         self.get_sprite(self._directions[direction])
 
+    def draw(self, offset_x=0, offset_y=0):
+        Element.draw(self, offset_x, offset_y)
+        if self._item is not None:
+            self._item.draw(self.x + 8, self.y + 13, offset_x, offset_y)
+
     def move(self, dx, dy):
         # Diagonal smooth move
         if dx != 0 and dy != 0:
@@ -114,11 +119,11 @@ class Player(Element):
 
         if issubclass(near_element.__class__, Provider):
             try:
-                self.item = near_element.interact()
+                self._item = near_element.interact()
             except ValueError:
                 print("Invalid item in hands")
         elif isinstance(near_element, Table) or isinstance(near_element, Rack):
             try:
-                self.item = near_element.interact(self._item)
+                self._item = near_element.interact(self._item)
             except ValueError:
                 print("Invalid item in hands")
