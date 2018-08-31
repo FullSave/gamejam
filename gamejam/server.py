@@ -10,16 +10,24 @@ from .misc import Item
 
 
 class RAM(Item):
-    pass
+    # FIXME depends on the spritesheet
+    sx = 0
+    sy = 0
 
 
 class CPU(Item):
-    pass
+    # FIXME depends on the spritesheet
+    sx = 0
+    sy = 0
 
 
 class Server(Item):
-    def __init__(self, x, y, w, h, spritesheet, sx, sy):
-        Item.__init__(self, x, y, w, h, spritesheet, sx, sy)
+    # FIXME depends on the spritesheet
+    sx = 0
+    sy = 0
+
+    def __init__(self, spritesheet):
+        Item.__init__(self, spritesheet, self.sx, self.sy)
 
         self._ram = 0
         self._cpu = 0
