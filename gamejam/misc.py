@@ -47,7 +47,10 @@ class SpriteSheet(object):
 
 
 class Item(object):
-    def __init__(self, spritesheet, sx, sy):
+    sx = 0
+    sy = 0
+
+    def __init__(self, spritesheet, sx=None, sy=None):
         """Basic Game Element
 
         Arguments:
@@ -57,8 +60,10 @@ class Item(object):
         """
         # Sprite sheet rendering
         self.spritesheet = spritesheet
-        self.sx = sx
-        self.sy = sy
+        if sx is not None:
+            self.sx = sx
+        if sy is not None:
+            self.sy = sy
 
     def copy(self):
         # Return a copy of this element to predict movements
