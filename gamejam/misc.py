@@ -73,9 +73,25 @@ class Sprite(object):
         self._h = h
         self._mask = mask
 
+    @property
+    def x(self):
+        return self._x
+    
+    @property
+    def y(self):
+        return self._y
+    
+    @property
+    def w(self):
+        return self._w
+    
+    @property
+    def h(self):
+        return self._h
+
     def render(self):
         return SPRITESHEET_IMAGE, self._x, self._y, \
-                self._w, self._h, self.mask
+                self._w, self._h, self._mask
 
 
 class Hitbox(object):
@@ -127,7 +143,7 @@ class Element(Item):
         self.hitbox = Hitbox(x, y, w, h)
 
     def draw(self, offset_x=0, offset_y=0):
-        Item.draw(self, self.x, self.y, offset_x, offset_x)
+        Item.draw(self, self.x, self.y, offset_x, offset_y)
 
     def copy(self):
         # Return a copy of this element to predict movements
