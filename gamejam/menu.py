@@ -34,6 +34,8 @@ class Menu(object):
             # Restart the game
             pass
 
+        self.map.update()
+
     def draw(self):
         pyxel.cls(0)
 
