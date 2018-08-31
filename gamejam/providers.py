@@ -6,15 +6,15 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
-from .misc import Element
+from .misc import Element, Hitbox
 from .server import RAM, CPU, Server
 
 
 class Provider(Element):
     item_class = None
 
-    def __init__(self, x, y, w, h):
-        Element.__init_(self, x, y, w, h)
+    def __init__(self, x, y):
+        Element.__init__(self, x, y, 32, 32, Hitbox(0, 8, 32, 24))
 
     def interact(self):
         if self.item_class is None:
@@ -27,8 +27,8 @@ class Provider(Element):
 class RAMProvider(Provider):
     item_class = RAM
 
-    def __init__(self, x, y, w, h):
-        Provider.__init_(self, x, y, w, h)
+    def __init__(self, x, y):
+        Provider.__init__(self, x, y)
 
         self.get_sprite("provider_ram")
 
@@ -36,8 +36,8 @@ class RAMProvider(Provider):
 class CPUProvider(Provider):
     item_class = CPU
 
-    def __init__(self, x, y, w, h):
-        Provider.__init_(self, x, y, w, h)
+    def __init__(self, x, y):
+        Provider.__init__(self, x, y)
 
         self.get_sprite("provider_cpu")
 
@@ -45,7 +45,7 @@ class CPUProvider(Provider):
 class CaseProvider(Provider):
     item_class = Server
 
-    def __init__(self, x, y, w, h):
-        Provider.__init_(self, x, y, w, h)
+    def __init__(self, x, y):
+        Provider.__init__(self, x, y)
 
         self.get_sprite("provider_case")

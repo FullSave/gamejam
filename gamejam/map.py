@@ -11,6 +11,8 @@ import pyxel
 from .player import Player
 from .wall import Wall
 from .rack import Rack
+from .providers import RAMProvider, CPUProvider, CaseProvider
+from .table import Table
 
 
 FLOOR_COLOR = 7
@@ -57,8 +59,15 @@ class Map(object):
         ]
         self._racks[3].get_sprite("rack1")
         self._racks[7].get_sprite("rack1")
-        self._providers = []
-        self._tables = []
+        self._providers = [
+            RAMProvider(0, 223-self._offset_y),
+            CPUProvider(32, 223-self._offset_y),
+            CaseProvider(64, 223-self._offset_y),
+        ]
+        self._tables = [
+            Table(133, 223-self._offset_y),
+            Table(165, 223-self._offset_y),
+        ]
 
         self._player = Player(self, 32, 120)
 

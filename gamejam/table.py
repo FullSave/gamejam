@@ -6,13 +6,13 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
-from .misc import Element
+from .misc import Element, Hitbox
 from .server import Server
 
 
 class Table(Element):
-    def __init__(self, x, y, w, h):
-        Element.__init_(self, x, y, w, h)
+    def __init__(self, x, y):
+        Element.__init__(self, x, y, 32, 32, Hitbox(0, 8, 32, 24))
 
         self.get_sprite("table")
 

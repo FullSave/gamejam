@@ -85,9 +85,14 @@ class Player(Element):
                     break
 
         near_element = self._map.racks[0]
-        print(near_element.hitbox)
 
         if issubclass(near_element.__class__, Provider):
-            near_element.interact()
+            try:
+                near_element.interact()
+            except ValueError:
+                print("Invalid item in hands")
         elif isinstance(near_element, Table) or isinstance(near_element, Rack):
-            near_element.interact(self._item)
+            try:
+                near_element.interact(self._item)
+            except ValueError:
+                print("Invalid item in hands")
