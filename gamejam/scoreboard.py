@@ -15,9 +15,9 @@ from .rack import Rack
 
 TXT_COLOR = 7
 TXT_SPACE = 2
-BORDER_COLOR = 7
-ICO_BG_COLOR = 5
-FULL_ORDER_COLOR = 6
+BORDER_COLOR = 12
+ICO_BG_COLOR = 0
+FULL_ORDER_COLOR = 2
 EMPTY_ORDER_COLOR = 5
 
 
@@ -42,16 +42,26 @@ class Order(object):
         pass
 
     def draw(self, x, y):
-        pyxel.rectb(x+5, y+5, x+16, y+16, 12)
-        pyxel.text(x+9, y+8, self._rack.number, TXT_COLOR)
-        #self._server.draw(x+19, y+5)
-        pyxel.rect(x+19, y+5, x+30, y+16, ICO_BG_COLOR)
-        #self._cpuitem.draw(x+33, y+44)
-        pyxel.rect(x+33, y+5, x+44, y+16, ICO_BG_COLOR)
-        pyxel.text(x+41, y+11, str(self._server._cpu), TXT_COLOR)
-        #self._ramitem.draw(x+47, y+58)
-        pyxel.rect(x+47, y+5, x+58, y+16, ICO_BG_COLOR)
-        pyxel.text(x+55, y+11, str(self._server._ram), TXT_COLOR)
+        #BG
+        pyxel.rect(x+2, y+2, x+61, y+19, 1)
+
+        #rack no
+        pyxel.rect(x+4, y+4, x+10, y+10, 10)
+        pyxel.text(x+6, y+5, self._rack.number, 0)
+
+        #server
+        #pyxel.rect(x+19, y+5, x+30, y+16, ICO_BG_COLOR)
+        self._server.draw(x+14, y+3)
+
+        #cpu
+        #pyxel.rect(x+33, y+5, x+44, y+16, ICO_BG_COLOR)
+        self._cpuitem.draw(x+31, y+3)
+        pyxel.text(x+44, y+14, str(self._server._cpu), TXT_COLOR)
+
+        #ram
+        #pyxel.rect(x+47, y+5, x+58, y+16, ICO_BG_COLOR)
+        self._ramitem.draw(x+46, y+3)
+        pyxel.text(x+58, y+14, str(self._server._ram), TXT_COLOR)
 
 
 class ScoreBoard(object):
@@ -72,7 +82,11 @@ class ScoreBoard(object):
         return random.choice(racks)
 
     def generate_order(self):
-        return Order(self.get_random_rack(), n_ram=random.randint(0, 2), n_cpu=random.randint(0, 2))
+        return Order(
+            rack=self.get_random_rack(),
+            n_ram=random.randint(0, 2),
+            n_cpu=random.randint(0, 2),
+        )
 
     def get_pos(self):
         return (0, 0)
@@ -103,7 +117,6 @@ class ScoreBoard(object):
 
     def _draw_order(self, x, y, order=None):
         if order:
-            pyxel.rectb(x+2, y+2, x+61, y+19, FULL_ORDER_COLOR)
             order.draw(x, y)
         else:
             pyxel.rectb(x+2, y+2, x+61, y+19, EMPTY_ORDER_COLOR)

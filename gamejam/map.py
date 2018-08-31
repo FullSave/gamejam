@@ -13,6 +13,9 @@ from .wall import Wall
 from .rack import Rack
 
 
+FLOOR_COLOR = 7
+
+
 class Map(object):
     def __init__(self, offset_x, offset_y):
         self._offset_x = offset_x
@@ -117,6 +120,11 @@ class Map(object):
             self._player.move(move_x, move_y)
 
     def draw(self):
+        pyxel.rect(self._offset_x,
+                   self._offset_y,
+                   self._offset_x + self._width - 1,
+                   self._offset_y + self._height - 1,
+                   FLOOR_COLOR)
         for element in self.elements:
             element.draw(self._offset_x, self._offset_y)
 
