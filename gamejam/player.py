@@ -16,10 +16,16 @@ from .rack import Rack
 
 class Player(Element):
     def __init__(self, map_, x, y):
-        Element.__init__(self, x, y, 32, 32, Hitbox(8, 16, 16, 15))
+        Element.__init__(self, x, y, 32, 32, Hitbox(8, 16, 16, 13))
 
         # Sprite loading
-        self.get_sprite("player_left0")
+        self._directions = {
+            "top": "chicken_back",
+            "bottom": "chicken_front",
+            "left": "chicken_left",
+            "right": "chicken_right"
+        }
+        self.set_direction("bottom")
 
         # Carried item
         self._item = None
@@ -28,15 +34,18 @@ class Player(Element):
         self._map = map_
 
         # Static diagonal smooth move
-        self._diagonal_move = (math.cos(45), math.sin(45))
+        self._diagonal_move = math.sqrt(2)
+
+    def set_direction(self, direction):
+        self._direction = direction
+        self.get_sprite(self._directions[direction])
 
     def move(self, dx, dy):
         # Diagonal smooth move
         if dx != 0 and dy != 0:
             # Only move on direction, to allow "slipping" against obstacles
-            smoothness_x, smoothness_y = self._diagonal_move
-            self.move(smoothness_x * dx, 0)
-            self.move(0, smoothness_y * dy)
+            self.move(dx / self._diagonal_move, 0)
+            self.move(0, dy / self._diagonal_move)
             return
 
         new_self = self.copy()
@@ -61,6 +70,15 @@ class Player(Element):
         else:
             self.x = new_self.x
             self.y = new_self.y
+
+            if dy < 0:
+                self.set_direction("top")
+            elif dy > 0:
+                self.set_direction("bottom")
+            elif dx < 0:
+                self.set_direction("left")
+            elif dx > 0:
+                self.set_direction("right")
 
     def interact(self):
         near_element = None
