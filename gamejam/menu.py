@@ -6,12 +6,10 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
-import os
-
 import pyxel
 
 from .map import Map
-from .misc import SPRITESHEET_IMAGE
+from .misc import SpriteSheet, Sprite
 from .scoreboard import ScoreBoard
 
 
@@ -22,11 +20,10 @@ class Menu(object):
     def __init__(self):
         pyxel.init(self._width, self._height, caption="Gamejam - FullSave")
 
-        assets = os.path.join(os.path.dirname(__file__), 'assets')
-        pyxel.image(SPRITESHEET_IMAGE).load(
-            0, 0, os.path.join(assets, 'spritesheet.png'))
+        spritesheet = SpriteSheet()
+        spritesheet.add_sprite('wall', Sprite(0, 0, 8, 8, 7))
 
-        self.map = Map()
+        self.map = Map(0, 24)
         self.scoreboard = ScoreBoard(self.map)
 
         pyxel.run(self.update, self.draw)

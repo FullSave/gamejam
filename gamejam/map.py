@@ -10,7 +10,9 @@ from .wall import Wall
 
 
 class Map(object):
-    def __init__(self):
+    def __init__(self, offset_x, offset_y):
+        self._offset_x = offset_x
+        self._offset_y = offset_y
         self.reset()
 
     def reset(self):
@@ -39,6 +41,6 @@ class Map(object):
     def draw(self):
         entities = self._walls + self._racks + self._providers + self._tables
         for entity in entities:
-            entity.draw()
+            entity.draw(self._offset_x, self._offset_y)
 
-        # self._player.draw()
+        # self._player.draw(self._offset_x, self._offset_y)
