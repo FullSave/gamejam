@@ -16,6 +16,7 @@ from .rack import Rack
 TXT_COLOR = 7
 TXT_SPACE = 2
 BORDER_COLOR = 7
+ICO_BG_COLOR = 5
 FULL_ORDER_COLOR = 6
 EMPTY_ORDER_COLOR = 5
 
@@ -42,13 +43,14 @@ class Order(object):
 
     def draw(self, x, y):
         pyxel.rectb(x+5, y+5, x+16, y+16, 12)
+        pyxel.text(x+9, y+8, self._rack.number, TXT_COLOR)
         #self._server.draw(x+19, y+5)
-        pyxel.rect(x+19, y+5, x+30, y+16, 13)
+        pyxel.rect(x+19, y+5, x+30, y+16, ICO_BG_COLOR)
         #self._cpuitem.draw(x+33, y+44)
-        pyxel.rect(x+33, y+5, x+44, y+16, 14)
+        pyxel.rect(x+33, y+5, x+44, y+16, ICO_BG_COLOR)
         pyxel.text(x+41, y+11, str(self._server._cpu), TXT_COLOR)
         #self._ramitem.draw(x+47, y+58)
-        pyxel.rect(x+47, y+5, x+58, y+16, 15)
+        pyxel.rect(x+47, y+5, x+58, y+16, ICO_BG_COLOR)
         pyxel.text(x+55, y+11, str(self._server._ram), TXT_COLOR)
 
 
@@ -60,10 +62,17 @@ class ScoreBoard(object):
         self._margin = Margin(5, 5, 5, 5)
         self._orders = []
 
-        order = Order(Rack(), n_ram=random.randint(0, 2), n_cpu=random.randint(0, 2))
+        order = self.generate_order()
         self._orders.append(order)
-        order = Order(Rack(), n_ram=random.randint(0, 2), n_cpu=random.randint(0, 2))
+        order = self.generate_order()
         self._orders.append(order)
+
+    def get_random_rack(self):
+        racks = list(filter(lambda x: not x.is_full, self._map.racks))
+        return random.choice(racks)
+
+    def generate_order(self):
+        return Order(self.get_random_rack(), n_ram=random.randint(0, 2), n_cpu=random.randint(0, 2))
 
     def get_pos(self):
         return (0, 0)

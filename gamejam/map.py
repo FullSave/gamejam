@@ -10,6 +10,7 @@ import pyxel
 
 from .player import Player
 from .wall import Wall
+from .rack import Rack
 
 
 class Map(object):
@@ -39,7 +40,10 @@ class Map(object):
             Wall(208, 128, 48, 8),
             Wall(200, 32, 8, 104),
         ]
-        self._racks = []
+        self._racks = [
+            Rack(0, 0, 32, 32, "1"),
+            Rack(32, 0, 32, 32, "2"),
+        ]
         self._providers = []
         self._tables = []
 
