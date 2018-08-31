@@ -104,7 +104,7 @@ class Item(object):
         # Return a copy of this element to predict movements
         return Item(self.sprite)
 
-    def draw(self, x, y, offset_x, offset_y):
+    def draw(self, x, y, offset_x=0, offset_y=0):
         # Drawn the sprite at the element coords
         pyxel.blt(x + offset_x, y + offset_y, *self.sprite.render())
 
@@ -126,7 +126,7 @@ class Element(Item):
         # The element hitbox
         self.hitbox = Hitbox(x, y, w, h)
 
-    def draw(self, offset_x, offset_y):
+    def draw(self, offset_x=0, offset_y=0):
         Item.draw(self, self.x, self.y, offset_x, offset_x)
 
     def copy(self):
