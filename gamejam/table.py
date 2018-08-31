@@ -11,8 +11,10 @@ from .server import Server
 
 
 class Table(Element):
-    def __init__(self, x, y, w, h, spritesheet, sx, sy):
-        Element.__init_(self, x, y, w, h, spritesheet, sx, sy)
+    def __init__(self, x, y, w, h):
+        Element.__init_(self, x, y, w, h)
+
+        self.get_sprite("table")
 
         self._server = None
 

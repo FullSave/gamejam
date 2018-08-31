@@ -13,12 +13,8 @@ from .server import RAM, CPU, Case
 class Provider(Element):
     item_class = None
 
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
-
-    def __init__(self, x, y, w, h, spritesheet):
-        Element.__init_(self, x, y, w, h, spritesheet)
+    def __init__(self, x, y, w, h):
+        Element.__init_(self, x, y, w, h)
 
     def interact(self):
         if self.item_class is None:
@@ -28,25 +24,28 @@ class Provider(Element):
             return self.item_class(self.spritesheet)
 
 
-class RAMProvider(Element):
+class RAMProvider(Provider):
     item_class = RAM
 
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
+    def __init__(self, x, y, w, h):
+        Provider.__init_(self, x, y, w, h)
+
+        self.get_sprite("provider_ram")
 
 
-class CPUProvider(Element):
+class CPUProvider(Provider):
     item_class = CPU
 
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
+    def __init__(self, x, y, w, h):
+        Provider.__init_(self, x, y, w, h)
+
+        self.get_sprite("provider_cpu")
 
 
-class CaseProvider(Element):
+class CaseProvider(Provider):
     item_class = Case
 
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
+    def __init__(self, x, y, w, h):
+        Provider.__init_(self, x, y, w, h)
+
+        self.get_sprite("provider_case")

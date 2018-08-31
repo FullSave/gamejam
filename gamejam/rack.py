@@ -10,4 +10,5 @@ from .misc import Item
 
 
 class Rack(Item):
-    pass
+    def __init__(self):
+        self.get_sprite("rack0")

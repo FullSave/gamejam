@@ -10,24 +10,18 @@ from .misc import Item
 
 
 class RAM(Item):
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
+    def __init__(self):
+        self.get_sprite("ram")
 
 
 class CPU(Item):
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
+    def __init__(self):
+        self.get_sprite("cpu")
 
 
 class Server(Item):
-    # FIXME depends on the spritesheet
-    sx = 0
-    sy = 0
-
     def __init__(self, ram=0, cpu=0):
-        Item.__init__(self)
+        self._get_sprite("server")
 
         self._ram = ram
         self._cpu = cpu
