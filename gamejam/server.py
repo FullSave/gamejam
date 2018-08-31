@@ -26,11 +26,11 @@ class Server(Item):
     sx = 0
     sy = 0
 
-    def __init__(self, spritesheet):
-        Item.__init__(self, spritesheet, self.sx, self.sy)
+    def __init__(self, ram=0, cpu=0):
+        Item.__init__(self)
 
-        self._ram = 0
-        self._cpu = 0
+        self._ram = ram
+        self._cpu = cpu
 
     def interact(self, Item):
         """ Interaction with the server
