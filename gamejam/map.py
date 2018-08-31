@@ -69,6 +69,10 @@ class Map(object):
     def player(self):
         return self._player
 
+    @property
+    def elements(self):
+        return self._walls + self._racks + self._providers + self._tables
+
     def update(self):
         # Move player
         move_x = move_y = 0
@@ -86,8 +90,7 @@ class Map(object):
         self._player.move(move_x, move_y)
 
     def draw(self):
-        entities = self._walls + self._racks + self._providers + self._tables
-        for entity in entities:
-            entity.draw(self._offset_x, self._offset_y)
+        for element in self.elements:
+            element.draw(self._offset_x, self._offset_y)
 
         self._player.draw(self._offset_x, self._offset_y)

@@ -27,9 +27,7 @@ class Player(Element):
         new_self.x = new_self.x + dx
         new_self.y = new_self.y + dy
 
-        elements = self._map.providers + self._map.racks + \
-            self._map.tables + self._map.walls
-        for element in elements:
+        for element in self._map.elements:
             if self.is_colliding(element):
                 break
         else:
