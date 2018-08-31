@@ -17,9 +17,13 @@ class Rack(Element):
         self.get_sprite("rack0")
         self.number = number
 
+        self._size = 4
+        self._servers = []
+
     @property
     def is_full(self):
-        return False  # FIXME: implement
+        # FIXME: is full when servers < size + requests
+        return len(self._servers) >= self._size
 
     def draw(self, offset_x=0, offset_y=0):
         Element.draw(self, offset_x, offset_y)
@@ -30,7 +34,8 @@ class Rack(Element):
 
     def interact(self, item):
         if isinstance(item, Server):
-            # TODO: do something
-            pass
+            if not self.is_full:
+                self._servers.append(item)
+                return None
         else:
             raise ValueError()
