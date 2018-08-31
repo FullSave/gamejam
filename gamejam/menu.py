@@ -18,7 +18,8 @@ class Menu(object):
     _height = 256
 
     def __init__(self):
-        pyxel.init(self._width, self._height, caption="Gamejam - FullSave")
+        pyxel.init(
+            self._width, self._height, caption="Gamejam - FullSave", fps=60)
 
         # Load sprites
         SpriteSheet().add_sprite("cpu", Sprite(0, 0, 16, 16, 7))
