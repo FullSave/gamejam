@@ -47,7 +47,7 @@ class SpriteSheet(object):
 
 
 class Item(object):
-    def __init__(self, x, y, w, h, spritesheet, sx, sy):
+    def __init__(self, spritesheet, sx, sy):
         """Basic Game Element
 
         Arguments:
@@ -55,27 +55,18 @@ class Item(object):
             * spritesheet: a SpriteSheet object
             * sx, sy: the coords, in multiple of w and h in the spritesheet
         """
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
-
+        # Sprite sheet rendering
+        self.spritesheet = spritesheet
         self.sx = sx
         self.sy = sy
 
-        # Sprite sheet rendering
-        self.spritesheet = spritesheet
-
     def copy(self):
         # Return a copy of this element to predict movements
-        return Item(
-                self.x, self.y, self.w, self.h,
-                self.spritesheet, self.sx, self.sy
-        )
+        return Item(self.spritesheet, self.sx, self.sy)
 
-    def draw(self):
+    def draw(self, x, y):
         # Drawn the sprite at the element coords
-        pyxel.blt(self.x, self.y, *self.spritesheet.render(self.sx, self.sy))
+        pyxel.blt(x, y, *self.spritesheet.render(self.sx, self.sy))
 
 
 class Element(Item):
@@ -92,14 +83,14 @@ class Element(Item):
         self.w = w
         self.h = h
 
-        self.sx = sx
-        self.sy = sy
-
         # The element hitbox
         self.hitbox = Hitbox(x, y, w, h)
 
         # Sprite sheet rendering
-        self.spritesheet = spritesheet
+        Item(spritesheet, sx, sy)
+
+    def draw(self):
+        Item.draw(self, self.x, self.y)
 
     def copy(self):
         # Return a copy of this element to predict movements
