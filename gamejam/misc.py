@@ -8,6 +8,9 @@ Copyrights 2018 by Fullsave
 
 import pyxel
 
+SPRITESHEET_IMAGE = 0
+SPRITESHEET_MASK = 7
+
 
 class Hitbox(object):
     def __init__(self, x, y, w, h):
@@ -26,24 +29,24 @@ class Hitbox(object):
 
 
 class SpriteSheet(object):
-    def __init__(self, image, w, h, mask=0):
+    def __init__(self, w, h, mask=None):
         """ SpriteSheet object
 
         Arguments:
-            image: a pyxel image number (0, 1 or 2)
             w, h: the sprites size
             mask: the transparent color
         """
-        self._image = image
-        self.w = w
-        self.h = h
+        self._w = w
+        self._h = h
         self._mask = mask
 
     def render(self, x, y, mask=None):
         if mask is None:
-            mask = self._mask
+            mask = self._mask or SPRITESHEET_MASK
 
-        return self._image, self._w * x, self._h * y, self._h, self._w, mask
+        return (
+            SPRITESHEET_IMAGE, self._w * x, self._h * y, self._w, self._h, mask
+        )
 
 
 class Item(object):
@@ -92,7 +95,7 @@ class Element(Item):
         self.hitbox = Hitbox(x, y, w, h)
 
         # Sprite sheet rendering
-        Item(spritesheet, sx, sy)
+        Item.__init__(self, spritesheet, sx, sy)
 
     def draw(self):
         Item.draw(self, self.x, self.y)

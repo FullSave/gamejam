@@ -11,6 +11,7 @@ import os
 import pyxel
 
 from map import Map
+from misc import SPRITESHEET_IMAGE
 from scoreboard import ScoreBoard
 
 
@@ -22,7 +23,8 @@ class Menu(object):
         pyxel.init(self._width, self._height, caption="Gamejam - FullSave")
 
         assets = os.path.join(os.path.dirname(__file__), 'assets')
-        pyxel.image(0).load(0, 0, os.path.join(assets, 'spritesheet.png'))
+        pyxel.image(SPRITESHEET_IMAGE).load(
+            0, 0, os.path.join(assets, 'spritesheet.png'))
 
         self.map = Map()
         self.scoreboard = ScoreBoard(self.map)

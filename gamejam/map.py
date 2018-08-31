@@ -16,7 +16,17 @@ class Map(object):
     def reset(self):
         """ Static map re-generation.
         """
-        self._walls = []
+        self._walls = [
+            # racks room
+            Wall(0, 48, 32, 8),
+            Wall(48, 48, 64, 8),
+            Wall(112, 0, 8, 64),
+
+            # providers room
+            Wall(0, 96, 64, 8),
+
+            # table room
+        ]
         self._racks = []
         self._providers = []
         self._tables = []
