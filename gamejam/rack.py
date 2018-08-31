@@ -7,12 +7,12 @@ Copyrights 2018 by Fullsave
 """
 
 import pyxel
-from .misc import Element
+from .misc import Element, Hitbox
 
 
 class Rack(Element):
     def __init__(self, x, y, w, h, number):
-        Element.__init__(self, x, y, w, h)
+        Element.__init__(self, x, y, w, h, Hitbox(7, 3, 18, 26))
         self.get_sprite("rack0")
         self.number = number
 
