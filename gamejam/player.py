@@ -31,22 +31,13 @@ class Player(Element):
         self._diagonal_move = (math.cos(45), math.sin(45))
 
     def move(self, dx, dy):
-        # Default one-way move
-        smoothness_x = 1
-        smoothness_y = 1
-
         # Diagonal smooth move
         if dx != 0 and dy != 0:
+            # Only move on direction, to allow "slipping" against obstacles
             smoothness_x, smoothness_y = self._diagonal_move
-
-        self.move_direction(smoothness_x * dx, 0)
-        self.move_direction(0, smoothness_y * dy)
-
-    def move_direction(self, dx, dy):
-        # Only move on direction, to allow "slipping" against obstacles
-        if dx != 0 and dy != 0:
-            self.move_direction(dx, 0)
-            self.move_direction(0, dy)
+            self.move(smoothness_x * dx, 0)
+            self.move(0, smoothness_y * dy)
+            return
 
         new_self = self.copy()
         new_self.x += dx
