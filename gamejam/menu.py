@@ -20,7 +20,7 @@ class Menu(object):
         pyxel.init(self._width, self._height, caption="Gamejam - FullSave")
 
         assets = os.path.join(os.path.dirname(__file__), 'assets')
-        # pyxel.image(0).load(0, 0, os.path.join(assets, 'logo.png')) 
+        pyxel.image(0).load(0, 0, os.path.join(assets, 'spritesheet.png'))
 
         self.map = None
         self.scoreboard = ScoreBoard(self.map)
