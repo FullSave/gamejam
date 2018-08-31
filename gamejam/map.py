@@ -6,7 +6,7 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
-from wall import Wall
+from .wall import Wall
 
 
 class Map(object):
