@@ -13,7 +13,7 @@ from .misc import Element, Hitbox
 
 class Player(Element):
     def __init__(self, map_, x, y):
-        Element.__init__(self, x, y, 32, 32, Hitbox(10, 20, 12, 12))
+        Element.__init__(self, x, y, 32, 32, Hitbox(8, 16, 16, 15))
 
         # Sprite loading
         self.get_sprite("player_left0")
