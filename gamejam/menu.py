@@ -8,8 +8,8 @@ Copyrights 2018 by Fullsave
 
 import pyxel
 
-from .map import Map
 from .misc import SpriteSheet, Sprite
+from .map import Map
 from .scoreboard import ScoreBoard
 
 
@@ -20,8 +20,23 @@ class Menu(object):
     def __init__(self):
         pyxel.init(self._width, self._height, caption="Gamejam - FullSave")
 
-        spritesheet = SpriteSheet()
-        spritesheet.add_sprite('wall', Sprite(0, 0, 8, 8, 7))
+        # Load sprites
+        SpriteSheet().add_sprite("cpu", Sprite(0, 0, 16, 16, 7))
+        SpriteSheet().add_sprite("ram", Sprite(16, 0, 16, 16, 7))
+        SpriteSheet().add_sprite("case", Sprite(32, 0, 16, 16, 7))
+        SpriteSheet().add_sprite('wall', Sprite(48, 0, 8, 8, 7))
+        SpriteSheet().add_sprite("rack0", Sprite(0, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("rack1", Sprite(32, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("power", Sprite(64, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("network", Sprite(96, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("player_left0", Sprite(128, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("player_left1", Sprite(160, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("player_right0", Sprite(196, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("player_right1", Sprite(224, 16, 32, 32, 7))
+        SpriteSheet().add_sprite("provider_cpu", Sprite(0, 48, 32, 32, 7))
+        SpriteSheet().add_sprite("provider_ram", Sprite(32, 48, 32, 32, 7))
+        SpriteSheet().add_sprite("provider_case", Sprite(64, 48, 32, 32, 7))
+        SpriteSheet().add_sprite("table", Sprite(96, 48, 32, 32, 7))
 
         self.map = Map(0, 24)
         self.scoreboard = ScoreBoard(self.map)
