@@ -36,11 +36,22 @@ class Player(Element):
         if dx != 0 and dy != 0:
             smoothness_x, smoothness_y = self._diagonal_move
 
-        # Test collisions with all other elements
         new_self = self.copy()
         new_self.x += smoothness_x * dx
         new_self.y += smoothness_y * dy
 
+        # Map limits
+        if new_self.x + self.hitbox.x < 0:
+            new_self.x = -self.hitbox.x
+        elif new_self.x + self.hitbox.x2 > self._map.width:
+            new_self.x = self._map.width - self.hitbox.x2
+
+        if new_self.y + self.hitbox.y < 0:
+            new_self.y = -self.hitbox.y
+        if new_self.y + self.hitbox.y2 > self._map.height:
+            new_self.y = self._map.height - self.hitbox.y2
+
+        # Test collisions with all other elements
         for element in self._map.elements:
             if new_self.is_colliding(element):
                 break

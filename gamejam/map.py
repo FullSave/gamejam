@@ -17,6 +17,8 @@ class Map(object):
     def __init__(self, offset_x, offset_y):
         self._offset_x = offset_x
         self._offset_y = offset_y
+        self._width = pyxel.width - offset_x
+        self._height = pyxel.height - offset_y
         self.reset()
 
     def reset(self):
@@ -56,6 +58,22 @@ class Map(object):
         self._tables = []
 
         self._player = Player(self, 32, 120)
+
+    @property
+    def offset_x(self):
+        return self._offset_x
+
+    @property
+    def offset_y(self):
+        return self._offset_y
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def height(self):
+        return self._height
 
     @property
     def walls(self):
