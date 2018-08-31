@@ -11,7 +11,7 @@ import os
 import pyxel
 
 
-class Game(object):
+class Menu(object):
     _width = 256
     _height = 256
 
@@ -37,4 +37,4 @@ class Game(object):
 
 
 if __name__ == '__main__':
-    Game()
+    Menu()
