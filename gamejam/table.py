@@ -31,16 +31,25 @@ class Table(Element):
 
         If the table has a server on it, the item is interacted with it
         """
+        # Put a server  on the table
         if isinstance(item, Server):
             if self._server is not None:
                 raise ValueError
 
             self._server = item
+            return None
 
-        elif item is not None:
+        # Interact the item with the server
+        elif item is not None and self._server:
             self._server.interact(item)
+            return None
 
-        else:
+        # Hands free, get the server from the table
+        elif not item:
             server = self._server
             self._server = None
             return server
+
+        # Nothing to do with what your tried to give me
+        # FIXME: to decide: lose the item in case of error ?
+        return item
