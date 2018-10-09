@@ -93,8 +93,7 @@ class Player(Element):
     def interact(self):
         near_element = None
 
-        sx1 = self.x + self.hitbox.x
-        sx2 = self.x + self.hitbox.x2
+        sx = self.x + self.hitbox.w
         sy1 = self.y + self.hitbox.y
         sy2 = self.y + self.hitbox.y2
 
@@ -105,11 +104,9 @@ class Player(Element):
             ey1 = element.y + element.hitbox.y
             ey2 = element.y + element.hitbox.y2
 
-            if sx1 >= ex1 and sx2 <= ex2 and sy2 <= ey1 and sy2 >= ey1 - 8:
+            if sx >= ex1 and sx <= ex2 and sy2 <= ey1 and sy2 >= ey1 - 8:
                 near_element = element
                 break
-
-        print(near_element, near_element is None)
 
         if near_element is None:
             # Elements the player must be below
@@ -118,7 +115,7 @@ class Player(Element):
                 ex2 = element.x + element.hitbox.x2
                 ey1 = element.y + element.hitbox.y
                 ey2 = element.y + element.hitbox.y2
-                if sx1 >= ex1 and sx2 <= ex2 and sy1 >= ey2 and sy1 <= ey2 + 8:
+                if sx >= ex1 and sx <= ex2 and sy1 >= ey2 and sy1 <= ey2 + 8:
                     near_element = element
                     break
 
