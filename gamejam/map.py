@@ -33,7 +33,7 @@ class Map(object):
         """
         self._score = 0
         self._time = START_TIME
-        self._prevtime = time.clock()
+        self._prevtime = time.perf_counter()
         self._walls = [
             # racks room
             Wall(0, 128, 32, 8),
@@ -129,7 +129,7 @@ class Map(object):
         return self._walls + self._racks + self._providers + self._tables
 
     def update(self):
-        t = time.clock()
+        t = time.perf_counter()
         delta = t - self._prevtime
         self._prevtime = t
         self._time -= delta
