@@ -31,6 +31,22 @@ class Server(Item):
     def is_racked(self):
         return False  # FIXME
 
+    @property
+    def cpu(self):
+        return self._cpu
+
+    @property
+    def ram(self):
+        return self._ram
+
+    def compare(self, other):
+        erros = 0
+        if self._ram != other._ram:
+            errors += 1
+        if self._cpu == other._cpu:
+            errors += 1
+        return errors
+
     def draw(self, x, y, offset_x=0, offset_y=0):
         Item.draw(self, x, y, offset_x, offset_y)
         if self.is_racked:
@@ -47,7 +63,6 @@ class Server(Item):
         if self._ram >= 2:
             pyxel.line(x + offset_x + 13, y + offset_y + 7,
                        x + offset_x + 13, y + offset_y + 8, 3)
-
 
     def interact(self, Item):
         """ Interaction with the server
