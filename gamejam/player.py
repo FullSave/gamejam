@@ -15,17 +15,12 @@ from .rack import Rack
 
 
 class Player(Element):
+    # duration of 1 player animation frame (bases on fps)
+    frame_duration = 5
+    frames = 4
+
     def __init__(self, map_, x, y):
         Element.__init__(self, x, y, 32, 32, Hitbox(8, 16, 16, 13))
-
-        # Sprite loading
-        self._directions = {
-            "top": "chicken_back",
-            "bottom": "chicken_front",
-            "left": "chicken_left",
-            "right": "chicken_right"
-        }
-        self.set_direction("bottom")
 
         # Carried item
         self._item = None
@@ -36,9 +31,32 @@ class Player(Element):
         # Static diagonal smooth move
         self._diagonal_move = math.sqrt(2)
 
-    def set_direction(self, direction):
+        # Current count of frame for animation calculation
+        self._fps_count = 0
+        self._current_frame = 0
+
+        # Sprite loading
+        self._direction = "bottom"
+        self.update_sprite(direction="bottom")
+
+    def update_sprite(self, direction):
+        self._fps_count += 1
+
+        # Direction change resets frame count
+        if self._direction != direction:
+            self._fps_count = 0
+            self._current_frame = 0
         self._direction = direction
-        self.get_sprite(self._directions[direction])
+
+        # Add one more frame to the count, handling looping
+        if self._fps_count > self.frame_duration:
+            self._fps_count = 0
+            self._current_frame += 1
+        if self._current_frame >= self.frames:
+            self._current_frame = 0
+
+        # Update sprite
+        self.get_sprite('player_%s%d' % (direction, self._current_frame))
 
     def draw(self, offset_x=0, offset_y=0):
         if self._direction == 'top':
@@ -82,13 +100,13 @@ class Player(Element):
             self.y = new_self.y
 
             if dy < 0:
-                self.set_direction("top")
+                self.update_sprite(direction="top")
             elif dy > 0:
-                self.set_direction("bottom")
+                self.update_sprite(direction="bottom")
             elif dx < 0:
-                self.set_direction("left")
+                self.update_sprite(direction="left")
             elif dx > 0:
-                self.set_direction("right")
+                self.update_sprite(direction="right")
 
     def interact(self):
         near_element = None

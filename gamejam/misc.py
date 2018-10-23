@@ -10,7 +10,9 @@ import os
 
 import pyxel
 
-SPRITESHEET_IMAGE = 0
+STATIC_IMAGES = 0
+BACKGROUND_IMAGE = 1
+PLAYER_IMAGE = 2
 
 
 class SpriteSheet(object):
@@ -35,8 +37,12 @@ class SpriteSheet(object):
             return
 
         assets = os.path.join(os.path.dirname(__file__), 'assets')
-        pyxel.image(SPRITESHEET_IMAGE).load(
-                0, 0, os.path.join(assets, 'spritesheet.png'))
+        pyxel.image(STATIC_IMAGES).load(
+                0, 0, os.path.join(assets, 'static.png'))
+        # pyxel.image(BACKGROUND_IMAGE).load(
+        #         0, 0, os.path.join(assets, 'background.png'))
+        pyxel.image(PLAYER_IMAGE).load(
+                0, 0, os.path.join(assets, 'player.png'))
 
         self.initialized = True
 
@@ -66,12 +72,17 @@ class SpriteSheet(object):
 
 
 class Sprite(object):
-    def __init__(self, x, y, w, h, mask):
+    def __init__(self, bank, x, y, w, h, mask):
+        self._bank = bank
         self._x = x
         self._y = y
         self._w = w
         self._h = h
         self._mask = mask
+
+    @property
+    def bank(self):
+        return self._bank
 
     @property
     def x(self):
@@ -90,8 +101,7 @@ class Sprite(object):
         return self._h
 
     def render(self):
-        return SPRITESHEET_IMAGE, self._x, self._y, \
-                self._w, self._h, self._mask
+        return self._bank, self._x, self._y, self._w, self._h, self._mask
 
 
 class Hitbox(object):
