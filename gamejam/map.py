@@ -31,6 +31,7 @@ class Map(object):
     def reset(self):
         """ Static map re-generation.
         """
+        self._score = 0
         self._time = START_TIME
         self._prevtime = time.clock()
         self._walls = [
@@ -82,6 +83,10 @@ class Map(object):
     @property
     def time(self):
         return self._time
+
+    @property
+    def score(self):
+        return self._score
 
     @property
     def offset_x(self):
