@@ -39,6 +39,10 @@ class Server(Item):
     def ram(self):
         return self._ram
 
+    @property
+    def value(self):
+        return 50 + self._ram * 25 + self._cpu * 25
+
     def compare(self, other):
         erros = 0
         if self._ram != other._ram:
