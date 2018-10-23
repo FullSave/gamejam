@@ -103,7 +103,7 @@ class ScoreBoard(object):
         return 19850
 
     def get_timer(self):
-        return 320
+        return self._map.time
 
     def _draw_borders(self, x, y, w, h):
         pyxel.line(x, y+h-1, x+w, y+h-1, BORDER_COLOR)
@@ -113,7 +113,7 @@ class ScoreBoard(object):
         margin = self.get_margin()
         x += margin.left
         y += margin.top
-        pyxel.text(x, y, "TIME: {:d}".format(self.get_timer()), TXT_COLOR)
+        pyxel.text(x, y, "TIME: {:.1f}".format(self.get_timer()), TXT_COLOR)
         y += FONT_HEIGHT + TXT_SPACE
         pyxel.text(x, y, "SCORE: {:d}".format(self.get_score()), TXT_COLOR)
 

@@ -14,8 +14,8 @@ from .scoreboard import ScoreBoard
 
 
 class Menu(object):
-    _width = 256
-    _height = 256
+    _width = 255
+    _height = 255
 
     def __init__(self):
         pyxel.init(
@@ -54,6 +54,9 @@ class Menu(object):
             pass
 
         self.map.update()
+
+        if self.map.game_over:
+            pyxel.quit()
 
     def draw(self):
         pyxel.cls(0)

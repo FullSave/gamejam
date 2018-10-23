@@ -6,6 +6,7 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
+import time
 import pyxel
 
 from .player import Player
@@ -15,6 +16,7 @@ from .providers import RAMProvider, CPUProvider, CaseProvider
 from .table import Table
 
 
+START_TIME = 120.0  # Time (in seconds)
 FLOOR_COLOR = 7
 
 
@@ -29,6 +31,8 @@ class Map(object):
     def reset(self):
         """ Static map re-generation.
         """
+        self._time = START_TIME
+        self._prevtime = time.clock()
         self._walls = [
             # racks room
             Wall(0, 128, 32, 8),
@@ -72,6 +76,14 @@ class Map(object):
         self._player = Player(self, 32, 120)
 
     @property
+    def game_over(self):
+        return self._time <= 0.0
+
+    @property
+    def time(self):
+        return self._time
+
+    @property
     def offset_x(self):
         return self._offset_x
 
@@ -112,6 +124,13 @@ class Map(object):
         return self._walls + self._racks + self._providers + self._tables
 
     def update(self):
+        t = time.clock()
+        delta = t - self._prevtime
+        self._prevtime = t
+        self._time -= delta
+        if self._time <= 0.0:
+            self._time = 0.0
+
         # Move player
         move_x = move_y = 0
         speed = 1.5
