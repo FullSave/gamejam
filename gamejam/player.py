@@ -20,7 +20,7 @@ class Player(Element):
     frames = 4
 
     def __init__(self, map_, x, y):
-        Element.__init__(self, x, y, 32, 32, Hitbox(8, 16, 16, 13))
+        Element.__init__(self, x, y, 32, 32, Hitbox(7, 16, 18, 15))
 
         # Carried item
         self._item = None
