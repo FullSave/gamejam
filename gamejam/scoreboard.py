@@ -39,7 +39,13 @@ class Order(object):
         self._ramitem = RAM()
 
     def validate(self, rack, server):
-        pass
+        errors = self._server.compare(server)
+        if rack is not self._rack:
+            errors += 1
+        if errors > 0:
+            return 0
+        # else:
+        return server.value
 
     def draw(self, x, y):
         #BG
@@ -100,7 +106,7 @@ class ScoreBoard(object):
         return self._margin
 
     def get_score(self):
-        return 19850
+        return self._map.score
 
     def get_timer(self):
         return self._map.time
