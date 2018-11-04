@@ -14,6 +14,7 @@ from .wall import Wall
 from .rack import Rack
 from .providers import RAMProvider, CPUProvider, CaseProvider
 from .table import Table
+from .scoreboard import ScoreBoard
 
 
 START_TIME = 120.0  # Time (in seconds)
@@ -21,7 +22,8 @@ FLOOR_COLOR = 7
 
 
 class Map(object):
-    def __init__(self, offset_x, offset_y):
+    def __init__(self, game, offset_x, offset_y):
+        self._game = game
         self._offset_x = offset_x
         self._offset_y = offset_y
         self._width = pyxel.width - offset_x
@@ -75,6 +77,7 @@ class Map(object):
         ]
 
         self._player = Player(self, 32, 120)
+        self._scoreboard = ScoreBoard(self)
 
     @property
     def game_over(self):
@@ -135,6 +138,7 @@ class Map(object):
         self._time -= delta
         if self._time <= 0.0:
             self._time = 0.0
+            self._game.complete_map()
 
         # Move player
         move_x = move_y = 0
@@ -155,6 +159,8 @@ class Map(object):
             self._player.move(move_x, move_y)
 
     def draw(self):
+        self._scoreboard.draw()
+
         pyxel.rect(self._offset_x,
                    self._offset_y,
                    self._offset_x + self._width - 1,

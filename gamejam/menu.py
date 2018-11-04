@@ -8,9 +8,9 @@ Copyrights 2018 by Fullsave
 
 import pyxel
 
+from .leaderboard import LeaderBoard
 from .misc import SpriteSheet, Sprite, STATIC_IMAGES, PLAYER_IMAGE
 from .map import Map
-from .scoreboard import ScoreBoard
 
 
 class Menu(object):
@@ -61,29 +61,37 @@ class Menu(object):
         SpriteSheet().add_sprite("player_left2", Sprite(PLAYER_IMAGE, 192, 32, 32, 32, 6))
         SpriteSheet().add_sprite("player_left3", Sprite(PLAYER_IMAGE, 224, 32, 32, 32, 6))
 
-        self.map = Map(0, 24)
-        self.scoreboard = ScoreBoard(self.map)
+        self.map = Map(self, 0, 24)
+        self.leaderboard = LeaderBoard(self)
+
+        self.current_state = self.leaderboard
 
         pyxel.run(self.update, self.draw)
+
+    def start_map(self):
+        self.map.reset()
+        self.current_state = self.map
+
+    def complete_map(self):
+        player_name = "Unamed player"  # FIXME: get player name
+        score = self.map.score
+        ranking = self.leaderboard.add_score(player_name, score)
+        self.current_state = self.leaderboard
 
     def update(self):
         if pyxel.btnp(pyxel.KEY_R):
             # Restart the game
             pass
 
-        self.map.update()
+        self.current_state.update()
 
-        if self.map.game_over:
-            pyxel.quit()
+        #if self.map.game_over:
+        #    pyxel.quit()
 
     def draw(self):
         pyxel.cls(0)
-
-        # Draw UI
-        self.scoreboard.draw()
-
         # Draw Map
-        self.map.draw()
+        self.current_state.draw()
 
 
 if __name__ == '__main__':

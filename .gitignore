@@ -1,2 +1,5 @@
+venv/
+venv3/
 __pycache__
 *.pyc
+/ranking.json
