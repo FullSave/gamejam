@@ -22,7 +22,6 @@ class Rack(Element):
 
     @property
     def is_full(self):
-        # FIXME: is full when servers < size + requests
         return len(self._servers) >= self._size
 
     def draw(self, offset_x=0, offset_y=0):
@@ -43,5 +42,4 @@ class Rack(Element):
             if not self.is_full:
                 self._servers.append(item)
                 return None
-        else:
-            raise ValueError()
+        raise ValueError()
