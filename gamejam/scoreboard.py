@@ -96,6 +96,18 @@ class ScoreBoard(object):
             n_cpu=random.randint(0, 2),
         )
 
+    def validate_server(self, rack, server):
+        for order in self._orders:
+            value = order.validate(rack, server)
+
+            if value:
+                self._map.score += value
+                self._orders.remove(order)
+                self._orders.append(self.generate_order())
+                break
+        # else:
+        # FIXME: racked a server for free, show a warning
+
     def get_pos(self):
         return (0, 0)
 

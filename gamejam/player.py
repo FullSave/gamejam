@@ -144,6 +144,11 @@ class Player(Element):
                 print("Invalid item in hands")
         elif isinstance(near_element, Table) or isinstance(near_element, Rack):
             try:
-                self._item = near_element.interact(self._item)
+                item = self._item
+                self._item = near_element.interact(item)
+
+                if isinstance(near_element, Rack):
+                    value = self._map.scoreboard.validate_server(
+                        near_element, item)
             except ValueError:
                 print("Invalid item in hands")

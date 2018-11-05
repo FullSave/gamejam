@@ -24,8 +24,8 @@ class Server(Item):
     def __init__(self, ram=0, cpu=0):
         self.get_sprite("server")
 
-        self._ram = ram
-        self._cpu = cpu
+        self._ram = int(ram)
+        self._cpu = int(cpu)
 
     @property
     def is_racked(self):
@@ -44,10 +44,10 @@ class Server(Item):
         return 50 + self._ram * 25 + self._cpu * 25
 
     def compare(self, other):
-        erros = 0
+        errors = 0
         if self._ram != other._ram:
             errors += 1
-        if self._cpu == other._cpu:
+        if self._cpu != other._cpu:
             errors += 1
         return errors
 

@@ -91,6 +91,14 @@ class Map(object):
     def score(self):
         return self._score
 
+    @score.setter
+    def score(self, value):
+        self._score += value
+
+    @property
+    def scoreboard(self):
+        return self._scoreboard
+
     @property
     def offset_x(self):
         return self._offset_x
