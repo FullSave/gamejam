@@ -6,20 +6,21 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
+import pyxel
 from .misc import Element, Hitbox
 from .server import Server
 
 
 class Table(Element):
     def __init__(self, x, y):
-        Element.__init__(self, x, y, 32, 32, Hitbox(0, 8, 32, 24))
+        Element.__init__(self, x, y, 32, 32, Hitbox(0, 7, 32, 16))
 
         self.get_sprite("table")
 
         self._server = None
 
     def draw(self, offset_x=0, offset_y=0):
-        Element.draw(self, offset_x, offset_y)
+        # TODO Draw the server at the right position
         if self._server is not None:
             self._server.draw(self.x + 8, self.y + 3, offset_x, offset_y)
 

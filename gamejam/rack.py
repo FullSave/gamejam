@@ -25,6 +25,7 @@ class Rack(Element):
         return len(self._servers) >= self._size
 
     def draw(self, offset_x=0, offset_y=0):
+        return
         Element.draw(self, offset_x, offset_y)
         x = self.x + offset_x
         y = self.y + offset_y + 1

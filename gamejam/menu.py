@@ -9,7 +9,8 @@ Copyrights 2018 by Fullsave
 import pyxel
 
 from .leaderboard import LeaderBoard
-from .misc import SpriteSheet, Sprite, STATIC_IMAGES, PLAYER_IMAGE
+from .misc import SpriteSheet, Sprite, STATIC_IMAGES, PLAYER_IMAGE, \
+    BACKGROUND_IMAGE
 from .map import Map
 
 
@@ -61,6 +62,23 @@ class Menu(object):
         SpriteSheet().add_sprite("player_left2", Sprite(PLAYER_IMAGE, 192, 32, 32, 32, 6))
         SpriteSheet().add_sprite("player_left3", Sprite(PLAYER_IMAGE, 224, 32, 32, 32, 6))
 
+        # Background elements that can be in front of the player
+        SpriteSheet().add_sprite("racks_1_top", Sprite(BACKGROUND_IMAGE, 36, 85, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_2_top", Sprite(BACKGROUND_IMAGE, 68, 85, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_3_top", Sprite(BACKGROUND_IMAGE, 100, 85, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_4_top", Sprite(BACKGROUND_IMAGE, 132, 85, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_5_top", Sprite(BACKGROUND_IMAGE, 164, 85, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_6_top", Sprite(BACKGROUND_IMAGE, 36, 21, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_7_top", Sprite(BACKGROUND_IMAGE, 68, 21, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_8_top", Sprite(BACKGROUND_IMAGE, 100, 21, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_9_top", Sprite(BACKGROUND_IMAGE, 132, 21, 24, 26, 6))
+        SpriteSheet().add_sprite("racks_10_top", Sprite(BACKGROUND_IMAGE, 164, 21, 24, 26, 6))
+        SpriteSheet().add_sprite("wall_left", Sprite(BACKGROUND_IMAGE, 0, 143, 72, 25, 6))
+        SpriteSheet().add_sprite("wall_middle", Sprite(BACKGROUND_IMAGE, 108, 143, 8, 25, 6))
+        SpriteSheet().add_sprite("wall_right", Sprite(BACKGROUND_IMAGE, 152, 143, 72, 25, 6))
+        SpriteSheet().add_sprite("table_left", Sprite(BACKGROUND_IMAGE, 0, 200, 96, 8, 6))
+        SpriteSheet().add_sprite("table_right", Sprite(BACKGROUND_IMAGE, 160, 200, 64, 8, 6))
+
         self.map = Map(self, 0, 24)
         self.leaderboard = LeaderBoard(self)
 
@@ -92,7 +110,6 @@ class Menu(object):
         pyxel.cls(0)
         # Draw Map
         self.current_state.draw()
-
 
 if __name__ == '__main__':
     Menu()

@@ -9,7 +9,7 @@ Copyrights 2018 by Fullsave
 import time
 import pyxel
 
-from .misc import BACKGROUND_IMAGE
+from .misc import BACKGROUND_IMAGE, SpriteSheet
 from .player import Player
 from .wall import Wall
 from .rack import Rack
@@ -37,22 +37,12 @@ class Map(object):
         self._time = START_TIME
         self._prevtime = time.perf_counter()
         self._walls = [
-            # racks room
-            Wall(0, 128, 32, 8),
-            Wall(64, 128, 96, 8),
-            Wall(160, 0, 8, 136),
-
-            # providers room
-            Wall(0, 168, 80, 8),
-            Wall(112, 168, 8, 64),
-
-            # table room
-            Wall(154, 168, 56, 8),
-            Wall(210, 168, 8, 64),
-
-            # network room
-            Wall(208, 128, 48, 8),
-            Wall(200, 32, 8, 104),
+            # Left wall
+            Wall(0, 167, 72, 9),
+            # Middle wall
+            Wall(107, 167, 9, 57),
+            # Right wall
+            Wall(151, 167, 72, 9),
         ]
         self._racks = [
             Rack(0, 0, 32, 32, "1"),
@@ -66,14 +56,15 @@ class Map(object):
         ]
         self._racks[3].get_sprite("rack1")
         self._racks[7].get_sprite("rack1")
+
         self._providers = [
-            RAMProvider(8, 223-self._offset_y),
-            CPUProvider(40, 223-self._offset_y),
-            CaseProvider(72, 223-self._offset_y),
+            RAMProvider(0, 200),
+            CPUProvider(32, 200),
+            CaseProvider(64, 200),
         ]
         self._tables = [
-            Table(133, 223-self._offset_y),
-            Table(165, 223-self._offset_y),
+            Table(160, 200),
+            Table(192, 200),
         ]
 
         self._player = Player(self, 32, 120)
@@ -175,7 +166,37 @@ class Map(object):
                    0, 0,
                    self._offset_x + self._width,
                    self._offset_y + self._height)
+
         for element in self.elements:
             element.draw(self._offset_x, self._offset_y)
 
         self._player.draw(self._offset_x, self._offset_y)
+
+        # Draw the part in front of the player if needed
+        if self._player.y < 37:
+            for i in range(0, 5):
+                pyxel.blt(
+                    self.offset_x + 36 + 32 * i, self.offset_y + 21,
+                    *SpriteSheet().get_sprite("racks_%s_top" % (i+6)).render())
+        elif self._player.y < 110:
+            for i in range(0, 5):
+                pyxel.blt(
+                    self.offset_x + 36 + 32 * i, self.offset_y + 85,
+                    *SpriteSheet().get_sprite("racks_%s_top" % (i+1)).render())
+        elif self._player.y < 167:
+            pyxel.blt(
+                self.offset_x + 0, self.offset_y + 143,
+                *SpriteSheet().get_sprite("wall_left").render())
+            pyxel.blt(
+                self.offset_x + 108, self.offset_y + 143,
+                *SpriteSheet().get_sprite("wall_middle").render())
+            pyxel.blt(
+                self.offset_x + 152, self.offset_y + 143,
+                *SpriteSheet().get_sprite("wall_right").render())
+        elif self._player.y < 209:
+            pyxel.blt(
+                self.offset_x + 0, self.offset_y + 200,
+                *SpriteSheet().get_sprite("table_left").render())
+            pyxel.blt(
+                self.offset_x + 160, self.offset_y + 200,
+                *SpriteSheet().get_sprite("table_right").render())

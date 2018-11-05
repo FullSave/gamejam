@@ -6,6 +6,7 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
+import pyxel
 from .misc import Element, Hitbox
 from .server import RAM, CPU, Server
 
@@ -14,7 +15,7 @@ class Provider(Element):
     item_class = None
 
     def __init__(self, x, y):
-        Element.__init__(self, x, y, 32, 32, Hitbox(0, 8, 32, 24))
+        Element.__init__(self, x, y, 32, 32, Hitbox(0, 7, 32, 16))
 
     def interact(self):
         if self.item_class is None:
@@ -22,6 +23,9 @@ class Provider(Element):
 
         else:
             return self.item_class()
+
+    def draw(self, offset_x, offset_y):
+        pass
 
 
 class RAMProvider(Provider):
