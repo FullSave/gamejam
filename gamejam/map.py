@@ -9,6 +9,7 @@ Copyrights 2018 by Fullsave
 import time
 import pyxel
 
+from .misc import BACKGROUND_IMAGE
 from .player import Player
 from .wall import Wall
 from .rack import Rack
@@ -18,7 +19,6 @@ from .scoreboard import ScoreBoard
 
 
 START_TIME = 120.0  # Time (in seconds)
-FLOOR_COLOR = 7
 
 
 class Map(object):
@@ -169,11 +169,12 @@ class Map(object):
     def draw(self):
         self._scoreboard.draw()
 
-        pyxel.rect(self._offset_x,
+        pyxel.blt(self._offset_x,
                    self._offset_y,
-                   self._offset_x + self._width - 1,
-                   self._offset_y + self._height - 1,
-                   FLOOR_COLOR)
+                   BACKGROUND_IMAGE,
+                   0, 0,
+                   self._offset_x + self._width,
+                   self._offset_y + self._height)
         for element in self.elements:
             element.draw(self._offset_x, self._offset_y)
 
