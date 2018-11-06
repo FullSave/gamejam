@@ -15,8 +15,8 @@ from .map import Map
 
 
 class Menu(object):
-    _width = 255
-    _height = 255
+    _width = 224
+    _height = 248
 
     def __init__(self):
         pyxel.init(
