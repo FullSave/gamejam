@@ -6,9 +6,10 @@ This file is part of FullSave Gamejam.
 Copyrights 2018 by Fullsave
 """
 
-import pyxel
 import json
 import os.path
+import pyxel
+from pyxel.constants import FONT_WIDTH
 
 SAVEFILE = os.path.abspath(os.path.dirname(__file__) + "/..") + "/ranking.json"
 
@@ -56,22 +57,26 @@ class LeaderBoard(object):
         self.save()
         return i + 1
 
+    @classmethod
+    def centered_text(cls, pos_y, text, color):
+        pyxel.text(pyxel.width/2 - len(text)*FONT_WIDTH/2, pos_y, text, color)
+
     def update(self):
         if pyxel.btnp(pyxel.KEY_SPACE):
             self._game.start_map()
 
     def draw(self):
-        pyxel.text(86, 5, "LEADER BOARD", TITLE_COLOR)
+        self.centered_text(5, "LEADER BOARD", TITLE_COLOR)
         rank = 0
         for (name, score) in self._ranking:
             rank += 1
             if rank > 20:
                 break
-            row = "{0:2d}.{1:.<43s}{2:05d}".format(rank, name, score)
+            row = "{0:2d}.{1:.<43s}{2:06d}".format(rank, name, score)
             if rank==1:
                 color = FIRST_COLOR
             else:
                 color = RANK_COLOR
-            pyxel.text(9, 10 + (rank*10), row, color)
+            self.centered_text(10 + (rank*10), row, color)
     
-        pyxel.text(25, 203, "Press SPACE to continue...", TITLE_COLOR)
+        self.centered_text(228, "Press SPACE to continue...", TITLE_COLOR)
