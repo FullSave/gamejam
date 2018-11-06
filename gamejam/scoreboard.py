@@ -80,10 +80,8 @@ class ScoreBoard(object):
         self._margin = Margin(5, 5, 5, 5)
         self._orders = []
 
-        order = self.generate_order()
-        self._orders.append(order)
-        order = self.generate_order()
-        self._orders.append(order)
+        for i in range(0, 3):
+            self._orders.append(self.generate_order())
 
     def get_random_rack(self):
         racks = list(filter(lambda x: not x.is_full, self._map.racks))
