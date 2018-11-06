@@ -36,6 +36,7 @@ class Map(object):
         self._score = 0
         self._time = START_TIME
         self._prevtime = time.perf_counter()
+
         self._walls = [
             # Left wall
             Wall(0, 167, 72, 9),
@@ -44,24 +45,18 @@ class Map(object):
             # Right wall
             Wall(151, 167, 72, 9),
         ]
-        self._racks = [
-            Rack(0, 0, 32, 32, "1"),
-            Rack(32, 0, 32, 32, "2"),
-            Rack(64, 0, 32, 32, "3"),
-            Rack(96, 0, 32, 32, "4"),
-            Rack(0, 64, 32, 32, "5"),
-            Rack(32, 64, 32, 32, "6"),
-            Rack(64, 64, 32, 32, "7"),
-            Rack(96, 64, 32, 32, "8"),
-        ]
-        self._racks[3].get_sprite("rack1")
-        self._racks[7].get_sprite("rack1")
+
+        self._racks = []
+        for i in range(1, 6):
+            self._racks.append(Rack(36 + 32 * (i-1), 85, 24, 42, "%s" % i))
+            self._racks.append(Rack(36 + 32 * (i-1), 21, 24, 42, "%s" % (i+5)))
 
         self._providers = [
             RAMProvider(0, 200),
             CPUProvider(32, 200),
             CaseProvider(64, 200),
         ]
+
         self._tables = [
             Table(160, 200),
             Table(192, 200),

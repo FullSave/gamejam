@@ -13,11 +13,11 @@ from .server import Server
 
 class Rack(Element):
     def __init__(self, x, y, w, h, number):
-        Element.__init__(self, x, y, w, h, Hitbox(7, 3, 18, 26))
-        self.get_sprite("rack0")
+        Element.__init__(self, x, y, w, h, Hitbox(0, 16, w-1, 16))
+        # XXX self.get_sprite("rack0")
         self.number = number
 
-        self._size = 5
+        self._size = 4
         self._servers = []
 
     @property
@@ -25,6 +25,7 @@ class Rack(Element):
         return len(self._servers) >= self._size
 
     def draw(self, offset_x=0, offset_y=0):
+        # TODO Draw servers in racks
         return
         Element.draw(self, offset_x, offset_y)
         x = self.x + offset_x

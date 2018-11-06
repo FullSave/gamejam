@@ -156,6 +156,15 @@ class Element(Item):
     def draw(self, offset_x=0, offset_y=0):
         Item.draw(self, self.x, self.y, offset_x, offset_y)
 
+    def draw_hitbox(self, offset_x=0, offset_y=0):
+        pyxel.rectb(
+            offset_x + self.x + self.hitbox.x,
+            offset_y + self.y + self.hitbox.y,
+            offset_x + self.x + self.hitbox.x2,
+            offset_y + self.y + self.hitbox.y2,
+            11
+        )
+
     def copy(self):
         # Return a copy of this element to predict movements
         return Element(self.x, self.y, self.w, self.h, self.hitbox)

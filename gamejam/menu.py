@@ -27,8 +27,8 @@ class Menu(object):
         SpriteSheet().add_sprite("ram", Sprite(STATIC_IMAGES, 16, 0, 16, 16, 7))
         SpriteSheet().add_sprite("server", Sprite(STATIC_IMAGES, 32, 0, 16, 16, 7))
         SpriteSheet().add_sprite("wall", Sprite(STATIC_IMAGES, 48, 0, 8, 8, 7))
-        SpriteSheet().add_sprite("rack0", Sprite(STATIC_IMAGES, 0, 16, 32, 32, 7))
-        SpriteSheet().add_sprite("rack1", Sprite(STATIC_IMAGES, 32, 16, 32, 32, 7))
+        # SpriteSheet().add_sprite("rack0", Sprite(STATIC_IMAGES, 0, 16, 32, 32, 7))
+        # SpriteSheet().add_sprite("rack1", Sprite(STATIC_IMAGES, 32, 16, 32, 32, 7))
         SpriteSheet().add_sprite("power", Sprite(STATIC_IMAGES, 64, 16, 32, 32, 7))
         SpriteSheet().add_sprite("network", Sprite(STATIC_IMAGES, 96, 16, 32, 32, 7))
         SpriteSheet().add_sprite("provider_cpu", Sprite(STATIC_IMAGES, 0, 48, 32, 32, 7))
@@ -63,16 +63,13 @@ class Menu(object):
         SpriteSheet().add_sprite("player_left3", Sprite(PLAYER_IMAGE, 224, 32, 32, 32, 6))
 
         # Background elements that can be in front of the player
-        SpriteSheet().add_sprite("racks_1_top", Sprite(BACKGROUND_IMAGE, 36, 85, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_2_top", Sprite(BACKGROUND_IMAGE, 68, 85, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_3_top", Sprite(BACKGROUND_IMAGE, 100, 85, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_4_top", Sprite(BACKGROUND_IMAGE, 132, 85, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_5_top", Sprite(BACKGROUND_IMAGE, 164, 85, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_6_top", Sprite(BACKGROUND_IMAGE, 36, 21, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_7_top", Sprite(BACKGROUND_IMAGE, 68, 21, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_8_top", Sprite(BACKGROUND_IMAGE, 100, 21, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_9_top", Sprite(BACKGROUND_IMAGE, 132, 21, 24, 26, 6))
-        SpriteSheet().add_sprite("racks_10_top", Sprite(BACKGROUND_IMAGE, 164, 21, 24, 26, 6))
+        for i in range(1, 6):
+            SpriteSheet().add_sprite(
+                "racks_%s_top" % i,
+                Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 85, 24, 26, 6))
+            SpriteSheet().add_sprite(
+                "racks_%s_top" % (i + 5),
+                Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 21, 24, 26, 6))
         SpriteSheet().add_sprite("wall_left", Sprite(BACKGROUND_IMAGE, 0, 143, 72, 25, 6))
         SpriteSheet().add_sprite("wall_middle", Sprite(BACKGROUND_IMAGE, 108, 143, 8, 25, 6))
         SpriteSheet().add_sprite("wall_right", Sprite(BACKGROUND_IMAGE, 152, 143, 72, 25, 6))
