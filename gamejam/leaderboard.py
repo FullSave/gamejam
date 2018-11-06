@@ -103,7 +103,13 @@ class LeaderBoard(object):
         pyxel.blt(
             (pyxel.width - 96) / 2,
             100,
-            *SpriteSheet().get_sprite("gamejam_logo").render())
+            *SpriteSheet().get_sprite("gamejam_logo").render()
+        )
+        pyxel.blt(8, 8, *SpriteSheet().get_sprite("fullsave_logo").render())
+        pyxel.blt(
+            pyxel.width - 40, 8,
+            *SpriteSheet().get_sprite("devfest_logo").render()
+        )
         self.centered_text(116, self._screen_quote, 10)
 
     def draw(self):

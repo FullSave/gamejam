@@ -34,6 +34,12 @@ class Menu(object):
         SpriteSheet().add_sprite(
             "gamejam_logo", Sprite(STATIC_IMAGES, 0, 128, 96, 32, 11)
         )
+        SpriteSheet().add_sprite(
+            "fullsave_logo", Sprite(STATIC_IMAGES, 96, 64, 32, 32, 11)
+        )
+        SpriteSheet().add_sprite(
+            "devfest_logo", Sprite(STATIC_IMAGES, 96, 96, 32, 32, 11)
+        )
 
         # Server CPU/RAM combination
         for cpu in range(0, 3):
