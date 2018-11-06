@@ -47,11 +47,7 @@ class Player(Element):
 
     def update_sprite(self, direction):
         self._fps_count += 1
-
-        # Direction change resets frame count
-        if self._direction != direction:
-            self._direction = direction
-            self.reset_animation()
+        self._direction = direction
 
         # Add one more frame to the count, handling looping
         if self._fps_count > self.frame_duration:
