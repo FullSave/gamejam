@@ -61,9 +61,9 @@ class Server(Item):
         Arguments:
             Item: an Item instance (CPU or RAM)
         """
-        if isinstance(Item, RAM):
+        if isinstance(Item, RAM) and self._ram < 2:
             self._ram = self._ram + 1
-        elif isinstance(Item, CPU):
+        elif isinstance(Item, CPU) and self._cpu < 2:
             self._cpu = self._cpu + 1
         else:
             raise ValueError
