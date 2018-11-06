@@ -45,16 +45,20 @@ class LeaderBoard(object):
             print("Unable to write ranking file.")
 
     def add_score(self, player_name, score):
-        """ Add player score to ranking, save new ranking, then return the 
+        """ Add player score to ranking, save new ranking, then return the
         player position in leader board.
         """
+        i = self.get_score_rank(score)
+        self._ranking.insert(i - 1, (player_name, score))
+        self.save()
+        return i
+
+    def get_score_rank(self, score):
         i = 0
         while i < len(self._ranking):
             if score > self._ranking[i][1]:
                 break
             i += 1
-        self._ranking.insert(i, (player_name, score))
-        self.save()
         return i + 1
 
     @classmethod
@@ -73,10 +77,10 @@ class LeaderBoard(object):
             if rank > 20:
                 break
             row = "{0:2d}.{1:.<43s}{2:06d}".format(rank, name, score)
-            if rank==1:
+            if rank == 1:
                 color = FIRST_COLOR
             else:
                 color = RANK_COLOR
             self.centered_text(10 + (rank*10), row, color)
-    
+
         self.centered_text(228, "Press SPACE to continue...", TITLE_COLOR)

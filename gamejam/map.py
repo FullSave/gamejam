@@ -8,8 +8,9 @@ Copyrights 2018 by Fullsave
 
 import time
 import pyxel
+from pyxel.constants import FONT_WIDTH
 
-from .misc import BACKGROUND_IMAGE, SpriteSheet, Hitbox
+from .misc import BACKGROUND_IMAGE, SpriteSheet, Hitbox, KEYS_TO_CHAR
 from .player import Player
 from .wall import Wall
 from .rack import Rack
@@ -29,6 +30,8 @@ class Map(object):
         self._offset_y = offset_y
         self._width = pyxel.width - offset_x
         self._height = pyxel.height - offset_y
+
+        # Game controller
         self._controller = Controller()
         self.reset()
 
@@ -38,6 +41,10 @@ class Map(object):
         self._score = 0
         self._time = START_TIME
         self._prevtime = time.perf_counter()
+
+        self._player_name = ""
+        self._cursor_counter = 0
+        self._is_completed = False
 
         # Error bubble
         self._error_bubble_fadeout = 0
@@ -145,13 +152,19 @@ class Map(object):
         self._error_bubble_fadeout = 120
 
     def update(self):
+        if not self._is_completed:
+            self.gameloop()
+        else:
+            self.timeoutloop()
+
+    def gameloop(self):
         t = time.perf_counter()
         delta = t - self._prevtime
         self._prevtime = t
         self._time -= delta
         if self._time <= 0.0:
             self._time = 0.0
-            self._game.complete_map()
+            self._is_completed = True
 
         if self._error_bubble_fadeout:
             self._error_bubble_fadeout -= 1
@@ -181,6 +194,25 @@ class Map(object):
         else:
             self._player.reset_animation()
 
+    def timeoutloop(self):
+        # Cycle through all the key, if one is pressed, change the player name
+        for key in pyxel.__dict__.keys():
+            if key.startswith('KEY_') and pyxel.btnp(getattr(pyxel, key)):
+                if key in KEYS_TO_CHAR:
+                    if pyxel.btn(pyxel.KEY_LEFT_SHIFT):
+                        self._player_name += KEYS_TO_CHAR[key].upper()
+                    else:
+                        self._player_name += KEYS_TO_CHAR[key]
+                elif key == 'KEY_BACKSPACE':
+                    self._player_name = self._player_name[:-1]
+                elif key == 'KEY_ENTER':
+                    self._game.complete_map(self._player_name)
+
+    def _centered_text(self, y, text):
+        pyxel.text(
+            self._width / 2 - len(text) * FONT_WIDTH / 2,
+            y + 3, text, 11)
+
     def draw(self):
         self._scoreboard.draw()
 
@@ -204,3 +236,36 @@ class Map(object):
                 self.offset_x + self._player.x - 8,
                 self.offset_y + self._player.y - 20,
                 *SpriteSheet().get_sprite("error_bubble").render())
+
+        if self._is_completed:
+            x1 = (self._width - 152) / 2 + self._offset_x
+            y1 = (self._height - 40) / 2 + self._offset_y
+            x2 = (self._width + 152) / 2 + self._offset_x
+            y2 = (self._height + 40) / 2 + self._offset_y
+            pyxel.rect(x1, y1, x2, y2, 0)
+            pyxel.rectb(x1, y1, x2, y2, 5)
+            self._centered_text(y1 + 3, "Timeout !")
+            rank = self._game.leaderboard.get_score_rank(self.score)
+            suffix = "th"
+            if rank == 2:
+                suffix = "nd"
+            elif rank == 1:
+                suffix = "st"
+            self._centered_text(
+                y1 + 11,
+                "You are ranked at the %s%s position." % (rank, suffix))
+            self._centered_text(
+                y1 + 19,
+                "Please enter your name :")
+            cursor = " "
+            if self._cursor_counter > 30:
+                cursor = "_"
+
+            self._cursor_counter += 1
+            if self._cursor_counter >= 60:
+                self._cursor_counter = 0
+
+            self._centered_text(
+                y1 + 27,
+                "%s%s" % (self._player_name, cursor)
+            )

@@ -111,8 +111,7 @@ class Menu(object):
         self.map.reset()
         self.current_state = self.map
 
-    def complete_map(self):
-        player_name = "Unamed player"  # FIXME: get player name
+    def complete_map(self, player_name):
         score = self.map.score
         ranking = self.leaderboard.add_score(player_name, score)
         self.current_state = self.leaderboard
