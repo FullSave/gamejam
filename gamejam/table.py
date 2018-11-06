@@ -50,5 +50,4 @@ class Table(Element):
             return server
 
         # Nothing to do with what your tried to give me
-        # FIXME: to decide: lose the item in case of error ?
-        return item
+        raise ValueError()

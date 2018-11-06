@@ -140,6 +140,10 @@ class Player(Element):
 
         if issubclass(near_element.__class__, Provider):
             try:
+                # Already an item in hands, can't pick another one
+                if self._item:
+                    raise ValueError()
+
                 self._item = near_element.interact()
             except ValueError:
                 self._map.show_error_bubble()
