@@ -49,27 +49,24 @@ class Order(object):
 
     def draw(self, x, y):
         #BG
-        pyxel.rect(x+2, y+2, x+61, y+19, 1)
+        pyxel.rect(x+2, y+2, x+52, y+19, 1)
 
         #rack no
         pyxel.rect(x+4, y+4, x+10, y+10, 10)
         pyxel.text(x+6, y+5, self._rack.number, 0)
 
         #server
-        #pyxel.rect(x+19, y+5, x+30, y+16, ICO_BG_COLOR)
-        self._server.draw(x+14, y+3)
+        self._server.draw(x+18, y+4)
 
         #cpu
         if self._server._cpu:
-            #pyxel.rect(x+33, y+5, x+44, y+16, ICO_BG_COLOR)
-            self._cpuitem.draw(x+31, y+3)
-            pyxel.text(x+44, y+14, str(self._server._cpu), TXT_COLOR)
+            self._cpuitem.draw(x+14, y+12)
+            pyxel.text(x+24, y+12, str(self._server._cpu), TXT_COLOR)
 
         #ram
         if self._server._ram:
-            #pyxel.rect(x+47, y+5, x+58, y+16, ICO_BG_COLOR)
-            self._ramitem.draw(x+46, y+3)
-            pyxel.text(x+58, y+14, str(self._server._ram), TXT_COLOR)
+            self._ramitem.draw(x+30, y+12)
+            pyxel.text(x+40, y+12, str(self._server._ram), TXT_COLOR)
 
 
 class ScoreBoard(object):
@@ -111,7 +108,7 @@ class ScoreBoard(object):
         return (0, 0)
 
     def get_size(self):
-        return (256, 24)
+        return (224, 24)
 
     def get_margin(self):
         return self._margin
@@ -138,7 +135,7 @@ class ScoreBoard(object):
         if order:
             order.draw(x, y)
         else:
-            pyxel.rectb(x+2, y+2, x+61, y+19, EMPTY_ORDER_COLOR)
+            pyxel.rectb(x+2, y+2, x+48, y+19, EMPTY_ORDER_COLOR)
 
     def _draw_orders(self, x, y):
         for i in range(0, 3):
@@ -146,11 +143,11 @@ class ScoreBoard(object):
                 order = self._orders[i]
             else:
                 order = None
-            self._draw_order(i*64+x, y, order)
+            self._draw_order(i*56+x, y, order)
 
     def draw(self):
         (x, y) = self.get_pos()
         (w, h) = self.get_size()
         self._draw_borders(x, y, w, h)
         self._draw_score(x, y)
-        self._draw_orders(x+64, y)
+        self._draw_orders(56 + x, y)
