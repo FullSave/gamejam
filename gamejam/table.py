@@ -12,13 +12,16 @@ from .server import Server
 
 
 class Table(Element):
-    def __init__(self, x, y):
-        Element.__init__(self, x, y, 32, 32, Hitbox(0, 7, 32, 16))
+    def __init__(self, x, y, number):
+        Element.__init__(self, x, y, 32, 24, Hitbox(0, 7, 32, 16))
+
+        self.get_sprite("table_%s" % number)
 
         self._server = None
 
     def draw(self, offset_x=0, offset_y=0):
-        # TODO Draw the server at the right position
+        Element.draw(self, offset_x, offset_y)
+
         if self._server is not None:
             self._server.draw(self.x + 3, self.y + 8, offset_x, offset_y)
 

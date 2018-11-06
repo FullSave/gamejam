@@ -9,7 +9,7 @@ Copyrights 2018 by Fullsave
 import time
 import pyxel
 
-from .misc import BACKGROUND_IMAGE, SpriteSheet
+from .misc import BACKGROUND_IMAGE, SpriteSheet, Hitbox
 from .player import Player
 from .wall import Wall
 from .rack import Rack
@@ -43,11 +43,11 @@ class Map(object):
 
         self._walls = [
             # Left wall
-            Wall(0, 167, 72, 9),
+            Wall(0, 143, 72, 33, "left", Hitbox(0, 24, 72, 9)),
             # Middle wall
-            Wall(107, 167, 9, 57),
+            Wall(108, 143, 8, 57, "middle", Hitbox(0, 24, 8, 57)),
             # Right wall
-            Wall(151, 167, 72, 9),
+            Wall(152, 143, 72, 33, "right", Hitbox(0, 24, 72, 9)),
         ]
 
         self._racks = []
@@ -56,18 +56,18 @@ class Map(object):
             self._racks.append(Rack(36 + 32 * (i-1), 21, 24, 42, "%s" % (i+5)))
 
         self._providers = [
-            CPUProvider(0, 200),
-            RAMProvider(32, 200),
-            CaseProvider(64, 200),
+            CPUProvider(0, 200, number=0),
+            RAMProvider(32, 200, number=1),
+            CaseProvider(64, 200, number=2),
         ]
 
         self._tables = [
-            Table(160, 200),
-            Table(192, 200),
+            Table(160, 200, number=3),
+            Table(192, 200, number=4),
         ]
 
         self._trashs = [
-            Trash(134, 204)
+            Trash(128, 192)
         ]
 
         self._player = Player(self, 32, 120)
@@ -178,50 +178,19 @@ class Map(object):
     def draw(self):
         self._scoreboard.draw()
 
-        pyxel.blt(self._offset_x,
-                   self._offset_y,
-                   BACKGROUND_IMAGE,
-                   0, 0,
-                   self._offset_x + self._width,
-                   self._offset_y + self._height)
+        pyxel.blt(
+            self._offset_x,
+            self._offset_y,
+            BACKGROUND_IMAGE,
+            0, 0,
+            self._offset_x + self._width,
+            self._offset_y + self._height)
 
-        for element in self.elements:
-            element.draw(self._offset_x, self._offset_y)
+        objects = self.elements + [self._player]
+        sorted_objects = sorted(objects, key=lambda e: e.y)
 
-        self._player.draw(self._offset_x, self._offset_y)
-
-        # Draw the part in front of the player if needed
-        player_y = self.offset_y + self._player.y + self._player.hitbox.y
-        if player_y < self.offset_y + 46:
-            for i in range(0, 5):
-                pyxel.blt(
-                    self.offset_x + 36 + 32 * i, self.offset_y + 21,
-                    *SpriteSheet().get_sprite("racks_%s_top" % (i+6)).render())
-        elif player_y < self.offset_y + 110:
-            for i in range(0, 5):
-                pyxel.blt(
-                    self.offset_x + 36 + 32 * i, self.offset_y + 85,
-                    *SpriteSheet().get_sprite("racks_%s_top" % (i+1)).render())
-        elif player_y < self.offset_y + 167:
-            pyxel.blt(
-                self.offset_x + 0, self.offset_y + 143,
-                *SpriteSheet().get_sprite("wall_left").render())
-            pyxel.blt(
-                self.offset_x + 108, self.offset_y + 143,
-                *SpriteSheet().get_sprite("wall_middle").render())
-            pyxel.blt(
-                self.offset_x + 152, self.offset_y + 143,
-                *SpriteSheet().get_sprite("wall_right").render())
-        elif player_y < self.offset_y + 209:
-            pyxel.blt(
-                self.offset_x + 0, self.offset_y + 200,
-                *SpriteSheet().get_sprite("table_left").render())
-            pyxel.blt(
-                self.offset_x + 160, self.offset_y + 200,
-                *SpriteSheet().get_sprite("table_right").render())
-            pyxel.blt(
-                self.offset_x + 134, self.offset_y + 204,
-                *SpriteSheet().get_sprite("trash_top").render())
+        for obj in sorted_objects:
+            obj.draw(self._offset_x, self._offset_y)
 
         # Show error bubble
         if self._error_bubble_fadeout:

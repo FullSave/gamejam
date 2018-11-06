@@ -14,8 +14,10 @@ from .server import RAM, CPU, Server
 class Provider(Element):
     item_class = None
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, number):
         Element.__init__(self, x, y, 32, 32, Hitbox(0, 7, 32, 16))
+
+        self.get_sprite("table_%s" % number)
 
     def interact(self):
         if self.item_class is None:
@@ -23,9 +25,6 @@ class Provider(Element):
 
         else:
             return self.item_class()
-
-    def draw(self, offset_x, offset_y):
-        pass
 
 
 class RAMProvider(Provider):

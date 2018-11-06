@@ -133,8 +133,6 @@ class ScoreBoard(object):
         while offset_x < 224:
             pyxel.blt(x + offset_x, y, *self._bg_texture.render())
             offset_x += 32
-        # XXX pyxel.line(x, y+h-1, x+w, y+h-1, BORDER_COLOR)
-        # XXX pyxel.line(x, y+h-2, x+w, y+h-2, BORDER_COLOR)
 
     def _draw_score(self, x, y):
         margin = self.get_margin()

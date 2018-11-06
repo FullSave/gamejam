@@ -58,17 +58,21 @@ class Menu(object):
         # Background elements that can be in front of the player
         for i in range(1, 6):
             SpriteSheet().add_sprite(
-                "racks_%s_top" % i,
-                Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 85, 24, 26, 6))
+                "rack_%s" % i,
+                Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 85, 24, 42, 6))
             SpriteSheet().add_sprite(
-                "racks_%s_top" % (i + 5),
-                Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 21, 24, 26, 6))
+                "rack_%s" % (i + 5),
+                Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 21, 24, 42, 6))
+
         SpriteSheet().add_sprite("wall_left", Sprite(BACKGROUND_IMAGE, 0, 143, 72, 25, 6))
         SpriteSheet().add_sprite("wall_middle", Sprite(BACKGROUND_IMAGE, 108, 143, 8, 25, 6))
         SpriteSheet().add_sprite("wall_right", Sprite(BACKGROUND_IMAGE, 152, 143, 72, 25, 6))
-        SpriteSheet().add_sprite("table_left", Sprite(BACKGROUND_IMAGE, 0, 200, 96, 8, 6))
-        SpriteSheet().add_sprite("table_right", Sprite(BACKGROUND_IMAGE, 160, 200, 64, 8, 6))
-        SpriteSheet().add_sprite("trash_top", Sprite(BACKGROUND_IMAGE, 134, 204, 17, 12, 7))
+        SpriteSheet().add_sprite("table_0", Sprite(BACKGROUND_IMAGE, 0, 200, 32, 24, 6))
+        SpriteSheet().add_sprite("table_1", Sprite(BACKGROUND_IMAGE, 32, 200, 32, 24, 6))
+        SpriteSheet().add_sprite("table_2", Sprite(BACKGROUND_IMAGE, 64, 200, 32, 24, 6))
+        SpriteSheet().add_sprite("table_3", Sprite(BACKGROUND_IMAGE, 160, 200, 32, 24, 6))
+        SpriteSheet().add_sprite("table_4", Sprite(BACKGROUND_IMAGE, 192, 200, 32, 24, 6))
+        SpriteSheet().add_sprite("trash", Sprite(STATIC_IMAGES, 96, 32, 32, 32, 11))
 
         self.map = Map(self, 0, 24)
         self.leaderboard = LeaderBoard(self)

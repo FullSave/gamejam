@@ -11,10 +11,9 @@ from .misc import Element, Hitbox
 
 class Trash(Element):
     def __init__(self, x, y):
-        Element.__init__(self, x, y, 17, 20, Hitbox(0, 10, 17, 10))
+        Element.__init__(self, x, y, 32, 32, Hitbox(6, 21, 18, 10))
 
-    def draw(self, offset_x=0, offset_y=0):
-        pass
+        self.get_sprite("trash")
 
     def interact(self, item):
         return None

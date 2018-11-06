@@ -10,5 +10,7 @@ from .misc import Element
 
 
 class Wall(Element):
-    def draw(self, offset_x, offset_y):
-        pass
+    def __init__(self, x, y, w, h, name, hitbox=None):
+        Element.__init__(self, x, y, w, h, hitbox)
+
+        self.get_sprite("wall_%s" % name)
