@@ -31,6 +31,9 @@ class Menu(object):
             "error_bubble", Sprite(STATIC_IMAGES, 64, 0, 32, 32, 11))
         SpriteSheet().add_sprite(
             "wall_texture", Sprite(STATIC_IMAGES, 96, 0, 32, 32, 11))
+        SpriteSheet().add_sprite(
+            "gamejam_logo", Sprite(STATIC_IMAGES, 0, 128, 96, 32, 11)
+        )
 
         # Server CPU/RAM combination
         for cpu in range(0, 3):
