@@ -40,14 +40,18 @@ class Player(Element):
         self._direction = "bottom"
         self.update_sprite(direction="bottom")
 
+    def reset_animation(self):
+        self._fps_count = 0
+        self._current_frame = 0
+        self.get_sprite('player_%s%d' % (self._direction, self._current_frame))
+
     def update_sprite(self, direction):
         self._fps_count += 1
 
         # Direction change resets frame count
         if self._direction != direction:
-            self._fps_count = 0
-            self._current_frame = 0
-        self._direction = direction
+            self._direction = direction
+            self.reset_animation()
 
         # Add one more frame to the count, handling looping
         if self._fps_count > self.frame_duration:
@@ -91,6 +95,9 @@ class Player(Element):
             new_self.y = -self.hitbox.y
         if new_self.y + self.hitbox.y2 > self._map.height:
             new_self.y = self._map.height - self.hitbox.y2
+
+        if self.x == new_self.x and self.y == new_self.y:
+            return
 
         # Test collisions with all other elements
         for element in self._map.elements:
