@@ -52,21 +52,27 @@ class Order(object):
         pyxel.rect(x+2, y+2, x+52, y+19, 1)
 
         #rack no
-        pyxel.rect(x+4, y+4, x+10, y+10, 10)
-        pyxel.text(x+6, y+5, self._rack.number, 0)
+        pyxel.rect(x+4, y+4, x+12, y+10, 10)
+        offset_x = 0
+        if self._rack.number != "10":
+            offset_x = 2
+        pyxel.text(x+5+offset_x, y+5, self._rack.number, 0)
 
         #server
-        self._server.draw(x+18, y+4)
+        self._server.draw(x+16, y+4)
+
+        # Server value
+        pyxel.text(x+17, y+12, str(self._server.value), TXT_COLOR)
 
         #cpu
+        self._cpuitem.draw(x+38, y+4)
         if self._server._cpu:
-            self._cpuitem.draw(x+14, y+12)
-            pyxel.text(x+24, y+12, str(self._server._cpu), TXT_COLOR)
+            pyxel.text(x+48, y+4, str(self._server._cpu), TXT_COLOR)
 
         #ram
+        self._ramitem.draw(x+38, y+12)
         if self._server._ram:
-            self._ramitem.draw(x+30, y+12)
-            pyxel.text(x+40, y+12, str(self._server._ram), TXT_COLOR)
+            pyxel.text(x+48, y+12, str(self._server._ram), TXT_COLOR)
 
 
 class ScoreBoard(object):
