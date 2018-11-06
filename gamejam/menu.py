@@ -32,28 +32,40 @@ class Menu(object):
         SpriteSheet().add_sprite(
             "wall_texture", Sprite(STATIC_IMAGES, 96, 0, 32, 32, 11))
 
+        # Server CPU/RAM combination
         for cpu in range(0, 3):
             for ram in range(0, 3):
                 SpriteSheet().add_sprite(
                     "server_%s_%s" % (cpu, ram),
                     Sprite(STATIC_IMAGES, 32 * ram, 32 + 32 * cpu, 32, 32, 11))
 
-        SpriteSheet().add_sprite("player_bottom0", Sprite(PLAYER_IMAGE, 0, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_bottom1", Sprite(PLAYER_IMAGE, 32, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_bottom2", Sprite(PLAYER_IMAGE, 64, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_bottom3", Sprite(PLAYER_IMAGE, 96, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_right0", Sprite(PLAYER_IMAGE, 128, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_right1", Sprite(PLAYER_IMAGE, 160, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_right2", Sprite(PLAYER_IMAGE, 192, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_right3", Sprite(PLAYER_IMAGE, 224, 0, 32, 32, 6))
-        SpriteSheet().add_sprite("player_top0", Sprite(PLAYER_IMAGE, 0, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_top1", Sprite(PLAYER_IMAGE, 32, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_top2", Sprite(PLAYER_IMAGE, 64, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_top3", Sprite(PLAYER_IMAGE, 96, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_left0", Sprite(PLAYER_IMAGE, 128, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_left1", Sprite(PLAYER_IMAGE, 160, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_left2", Sprite(PLAYER_IMAGE, 192, 32, 32, 32, 6))
-        SpriteSheet().add_sprite("player_left3", Sprite(PLAYER_IMAGE, 224, 32, 32, 32, 6))
+        # Player down
+        for i in range(0, 4):
+            SpriteSheet().add_sprite(
+                "player_bottom%s" % i,
+                Sprite(PLAYER_IMAGE, 32 * i, 0, 32, 32, 6)
+            )
+
+        # Player right
+        for i in range(0, 4):
+            SpriteSheet().add_sprite(
+                "player_right%s" % i,
+                Sprite(PLAYER_IMAGE, 128 + 32 * i, 0, 32, 32, 6)
+            )
+
+        # Player up
+        for i in range(0, 4):
+            SpriteSheet().add_sprite(
+                "player_top%s" % i,
+                Sprite(PLAYER_IMAGE, 32 * i, 32, 32, 32, 6)
+            )
+
+        # Player left
+        for i in range(0, 4):
+            SpriteSheet().add_sprite(
+                "player_left%s" % i,
+                Sprite(PLAYER_IMAGE, 128 + 32 * i, 32, 32, 32, 6)
+            )
 
         # Background elements that can be in front of the player
         for i in range(1, 6):
@@ -64,15 +76,29 @@ class Menu(object):
                 "rack_%s" % (i + 5),
                 Sprite(BACKGROUND_IMAGE, 36 + 32*(i-1), 21, 24, 42, 6))
 
-        SpriteSheet().add_sprite("wall_left", Sprite(BACKGROUND_IMAGE, 0, 143, 72, 25, 6))
-        SpriteSheet().add_sprite("wall_middle", Sprite(BACKGROUND_IMAGE, 108, 143, 8, 25, 6))
-        SpriteSheet().add_sprite("wall_right", Sprite(BACKGROUND_IMAGE, 152, 143, 72, 25, 6))
-        SpriteSheet().add_sprite("table_0", Sprite(BACKGROUND_IMAGE, 0, 200, 32, 24, 6))
-        SpriteSheet().add_sprite("table_1", Sprite(BACKGROUND_IMAGE, 32, 200, 32, 24, 6))
-        SpriteSheet().add_sprite("table_2", Sprite(BACKGROUND_IMAGE, 64, 200, 32, 24, 6))
-        SpriteSheet().add_sprite("table_3", Sprite(BACKGROUND_IMAGE, 160, 200, 32, 24, 6))
-        SpriteSheet().add_sprite("table_4", Sprite(BACKGROUND_IMAGE, 192, 200, 32, 24, 6))
-        SpriteSheet().add_sprite("trash", Sprite(STATIC_IMAGES, 96, 32, 32, 32, 11))
+        # Walls
+        SpriteSheet().add_sprite(
+            "wall_left", Sprite(BACKGROUND_IMAGE, 0, 143, 72, 25, 6))
+        SpriteSheet().add_sprite(
+            "wall_middle", Sprite(BACKGROUND_IMAGE, 108, 143, 8, 25, 6))
+        SpriteSheet().add_sprite(
+            "wall_right", Sprite(BACKGROUND_IMAGE, 152, 143, 72, 25, 6))
+
+        # Tables
+        SpriteSheet().add_sprite(
+            "table_0", Sprite(BACKGROUND_IMAGE, 0, 200, 32, 24, 6))
+        SpriteSheet().add_sprite(
+            "table_1", Sprite(BACKGROUND_IMAGE, 32, 200, 32, 24, 6))
+        SpriteSheet().add_sprite(
+            "table_2", Sprite(BACKGROUND_IMAGE, 64, 200, 32, 24, 6))
+        SpriteSheet().add_sprite(
+            "table_3", Sprite(BACKGROUND_IMAGE, 160, 200, 32, 24, 6))
+        SpriteSheet().add_sprite(
+            "table_4", Sprite(BACKGROUND_IMAGE, 192, 200, 32, 24, 6))
+
+        # Trash
+        SpriteSheet().add_sprite(
+            "trash", Sprite(STATIC_IMAGES, 96, 32, 32, 32, 11))
 
         self.map = Map(self, 0, 24)
         self.leaderboard = LeaderBoard(self)
@@ -98,13 +124,11 @@ class Menu(object):
 
         self.current_state.update()
 
-        #if self.map.game_over:
-        #    pyxel.quit()
-
     def draw(self):
         pyxel.cls(0)
         # Draw Map
         self.current_state.draw()
+
 
 if __name__ == '__main__':
     Menu()

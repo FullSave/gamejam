@@ -138,7 +138,8 @@ class Map(object):
 
     @property
     def elements(self):
-        return self._walls + self._racks + self._providers + self._tables + self._trashs
+        return self._walls + self._racks + self._providers + \
+            self._tables + self._trashs
 
     def show_error_bubble(self):
         self._error_bubble_fadeout = 120
@@ -159,17 +160,17 @@ class Map(object):
         move_x = move_y = 0
         speed = 2
 
-        axis_x = self._controller.get_axis('hat0x')
-        axis_y = self._controller.get_axis('hat0y')
+        axs_x = self._controller.get_axis('hat0x')
+        axs_y = self._controller.get_axis('hat0y')
         btn_a = self._controller.is_pressed('a')
 
-        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W) or axis_y < 0:
+        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W) or axs_y < 0:
             move_y = -speed
-        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S) or axis_y > 0:
+        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S) or axs_y > 0:
             move_y = speed
-        if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_A) or axis_x < 0:
+        if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_A) or axs_x < 0:
             move_x = -speed
-        elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D) or axis_x > 0:
+        elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D) or axs_x > 0:
             move_x = speed
 
         if pyxel.btnp(pyxel.KEY_SPACE) or btn_a:

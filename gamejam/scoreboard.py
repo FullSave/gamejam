@@ -48,29 +48,29 @@ class Order(object):
         return server.value
 
     def draw(self, x, y):
-        #BG
+        # Background
         pyxel.rect(x+2, y+2, x+52, y+19, 1)
         pyxel.rectb(x+2, y+2, x+52, y+19, 5)
 
-        #rack no
+        # Rack number
         pyxel.rect(x+4, y+4, x+12, y+10, 10)
         offset_x = 0
         if self._rack.number != "10":
             offset_x = 2
         pyxel.text(x+5+offset_x, y+5, self._rack.number, 0)
 
-        #server
+        # Server
         self._server.draw(x+16, y+4)
 
-        # Server value
+        # Server value
         pyxel.text(x+17, y+12, str(self._server.value), TXT_COLOR)
 
-        #cpu
+        # CPU
         self._cpuitem.draw(x+38, y+4)
         if self._server._cpu:
             pyxel.text(x+48, y+4, str(self._server._cpu), TXT_COLOR)
 
-        #ram
+        # RAM
         self._ramitem.draw(x+38, y+12)
         if self._server._ram:
             pyxel.text(x+48, y+12, str(self._server._ram), TXT_COLOR)

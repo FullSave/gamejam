@@ -123,7 +123,8 @@ class Player(Element):
         sy2 = self.y + self.hitbox.y2
 
         # Elements the player must be above
-        for element in self._map.providers + self._map.tables + self._map.trashs:
+        for element in self._map.providers + \
+                self._map.tables + self._map.trashs:
             ex1 = element.x + element.hitbox.x
             ex2 = element.x + element.hitbox.x2
             ey1 = element.y + element.hitbox.y
