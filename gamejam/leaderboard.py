@@ -61,7 +61,7 @@ class LeaderBoard(object):
             self._game.start_map()
 
     def draw(self):
-        pyxel.text(100, 5, "LEADER BOARD", TITLE_COLOR)
+        pyxel.text(86, 5, "LEADER BOARD", TITLE_COLOR)
         rank = 0
         for (name, score) in self._ranking:
             rank += 1
@@ -72,6 +72,6 @@ class LeaderBoard(object):
                 color = FIRST_COLOR
             else:
                 color = RANK_COLOR
-            pyxel.text(25, 10 + (rank*10), row, color)
+            pyxel.text(9, 10 + (rank*10), row, color)
     
-        pyxel.text(25, 235, "Press SPACE to continue...", TITLE_COLOR)
+        pyxel.text(25, 203, "Press SPACE to continue...", TITLE_COLOR)
