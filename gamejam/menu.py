@@ -29,6 +29,8 @@ class Menu(object):
             "item_ram", Sprite(STATIC_IMAGES, 32, 0, 32, 32, 11))
         SpriteSheet().add_sprite(
             "error_bubble", Sprite(STATIC_IMAGES, 64, 0, 32, 32, 11))
+        SpriteSheet().add_sprite(
+            "player_bottom0", Sprite(STATIC_IMAGES, 96, 0, 32, 32, 11))
 
         for cpu in range(0, 3):
             for ram in range(0, 3):
