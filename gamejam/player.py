@@ -11,6 +11,7 @@ import math
 from .misc import Element, Hitbox
 from .providers import Provider
 from .table import Table
+from .trash import Trash
 from .rack import Rack
 
 
@@ -116,7 +117,7 @@ class Player(Element):
         sy2 = self.y + self.hitbox.y2
 
         # Elements the player must be above
-        for element in self._map.providers + self._map.tables:
+        for element in self._map.providers + self._map.tables + self._map.trashs:
             ex1 = element.x + element.hitbox.x
             ex2 = element.x + element.hitbox.x2
             ey1 = element.y + element.hitbox.y
@@ -142,7 +143,7 @@ class Player(Element):
                 self._item = near_element.interact()
             except ValueError:
                 print("Invalid item in hands")
-        elif isinstance(near_element, Table) or isinstance(near_element, Rack):
+        elif isinstance(near_element, (Table, Rack, Trash)):
             try:
                 item = self._item
                 self._item = near_element.interact(item)

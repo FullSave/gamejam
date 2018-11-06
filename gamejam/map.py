@@ -15,6 +15,7 @@ from .wall import Wall
 from .rack import Rack
 from .providers import RAMProvider, CPUProvider, CaseProvider
 from .table import Table
+from .trash import Trash
 from .scoreboard import ScoreBoard
 
 
@@ -60,6 +61,10 @@ class Map(object):
         self._tables = [
             Table(160, 200),
             Table(192, 200),
+        ]
+
+        self._trashs = [
+            Trash(134, 204)
         ]
 
         self._player = Player(self, 32, 120)
@@ -118,12 +123,16 @@ class Map(object):
         return self._tables
 
     @property
+    def trashs(self):
+        return self._trashs
+
+    @property
     def player(self):
         return self._player
 
     @property
     def elements(self):
-        return self._walls + self._racks + self._providers + self._tables
+        return self._walls + self._racks + self._providers + self._tables + self._trashs
 
     def update(self):
         t = time.perf_counter()
@@ -196,3 +205,6 @@ class Map(object):
             pyxel.blt(
                 self.offset_x + 160, self.offset_y + 200,
                 *SpriteSheet().get_sprite("table_right").render())
+            pyxel.blt(
+                self.offset_x + 134, self.offset_y + 204,
+                *SpriteSheet().get_sprite("trash_top").render())

@@ -64,6 +64,7 @@ class Menu(object):
         SpriteSheet().add_sprite("wall_right", Sprite(BACKGROUND_IMAGE, 152, 143, 72, 25, 6))
         SpriteSheet().add_sprite("table_left", Sprite(BACKGROUND_IMAGE, 0, 200, 96, 8, 6))
         SpriteSheet().add_sprite("table_right", Sprite(BACKGROUND_IMAGE, 160, 200, 64, 8, 6))
+        SpriteSheet().add_sprite("trash_top", Sprite(BACKGROUND_IMAGE, 134, 204, 17, 12, 7))
 
         self.map = Map(self, 0, 24)
         self.leaderboard = LeaderBoard(self)
