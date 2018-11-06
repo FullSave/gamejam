@@ -105,6 +105,7 @@ class ScoreBoard(object):
 
             if value:
                 self._map.score += value
+                self._map.increase_time(10)
                 self._orders.remove(order)
                 self._orders.append(self.generate_order())
                 break

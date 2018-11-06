@@ -19,7 +19,7 @@ from .trash import Trash
 from .scoreboard import ScoreBoard
 
 
-START_TIME = 120.0  # Time (in seconds)
+START_TIME = 60.0  # Time (in seconds)
 
 
 class Map(object):
@@ -80,6 +80,9 @@ class Map(object):
     @property
     def time(self):
         return self._time
+
+    def increase_time(self, value):
+        self._prevtime += value
 
     @property
     def score(self):
