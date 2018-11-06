@@ -23,27 +23,16 @@ class Menu(object):
             self._width, self._height, caption="Gamejam - FullSave", fps=60)
 
         # Load sprites
-        SpriteSheet().add_sprite("cpu", Sprite(STATIC_IMAGES, 0, 0, 16, 16, 7))
-        SpriteSheet().add_sprite("ram", Sprite(STATIC_IMAGES, 16, 0, 16, 16, 7))
-        SpriteSheet().add_sprite("server", Sprite(STATIC_IMAGES, 32, 0, 16, 16, 7))
-        SpriteSheet().add_sprite("wall", Sprite(STATIC_IMAGES, 48, 0, 8, 8, 7))
-        # SpriteSheet().add_sprite("rack0", Sprite(STATIC_IMAGES, 0, 16, 32, 32, 7))
-        # SpriteSheet().add_sprite("rack1", Sprite(STATIC_IMAGES, 32, 16, 32, 32, 7))
-        SpriteSheet().add_sprite("power", Sprite(STATIC_IMAGES, 64, 16, 32, 32, 7))
-        SpriteSheet().add_sprite("network", Sprite(STATIC_IMAGES, 96, 16, 32, 32, 7))
-        SpriteSheet().add_sprite("provider_cpu", Sprite(STATIC_IMAGES, 0, 48, 32, 32, 7))
-        SpriteSheet().add_sprite("provider_ram", Sprite(STATIC_IMAGES, 32, 48, 32, 32, 7))
-        SpriteSheet().add_sprite("provider_case", Sprite(STATIC_IMAGES, 64, 48, 32, 32, 7))
-        SpriteSheet().add_sprite("table", Sprite(STATIC_IMAGES, 96, 48, 32, 32, 7))
+        SpriteSheet().add_sprite(
+            "item_cpu", Sprite(STATIC_IMAGES, 0, 0, 32, 32, 11))
+        SpriteSheet().add_sprite(
+            "item_ram", Sprite(STATIC_IMAGES, 32, 0, 32, 32, 11))
 
-        # SpriteSheet().add_sprite("player_left0", Sprite(128, 16, 32, 32, 7))
-        # SpriteSheet().add_sprite("player_left1", Sprite(160, 16, 32, 32, 7))
-        # SpriteSheet().add_sprite("player_right0", Sprite(192, 16, 32, 32, 7))
-        # SpriteSheet().add_sprite("player_right1", Sprite(224, 16, 32, 32, 7))
-        # SpriteSheet().add_sprite("chicken_front", Sprite(128, 144, 32, 32, 14))
-        # SpriteSheet().add_sprite("chicken_right", Sprite(160, 144, 32, 32, 14))
-        # SpriteSheet().add_sprite("chicken_back", Sprite(192, 144, 32, 32, 14))
-        # SpriteSheet().add_sprite("chicken_left", Sprite(224, 144, 32, 32, 14))
+        for cpu in range(0, 3):
+            for ram in range(0, 3):
+                SpriteSheet().add_sprite(
+                    "server_%s_%s" % (cpu, ram),
+                    Sprite(STATIC_IMAGES, 32 * ram, 32 + 32 * cpu, 32, 32, 11))
 
         SpriteSheet().add_sprite("player_bottom0", Sprite(PLAYER_IMAGE, 0, 0, 32, 32, 6))
         SpriteSheet().add_sprite("player_bottom1", Sprite(PLAYER_IMAGE, 32, 0, 32, 32, 6))

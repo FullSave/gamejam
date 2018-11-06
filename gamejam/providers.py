@@ -31,25 +31,10 @@ class Provider(Element):
 class RAMProvider(Provider):
     item_class = RAM
 
-    def __init__(self, x, y):
-        Provider.__init__(self, x, y)
-
-        self.get_sprite("provider_ram")
-
 
 class CPUProvider(Provider):
     item_class = CPU
 
-    def __init__(self, x, y):
-        Provider.__init__(self, x, y)
-
-        self.get_sprite("provider_cpu")
-
 
 class CaseProvider(Provider):
     item_class = Server
-
-    def __init__(self, x, y):
-        Provider.__init__(self, x, y)
-
-        self.get_sprite("provider_case")

@@ -38,7 +38,7 @@ class SpriteSheet(object):
 
         assets = os.path.join(os.path.dirname(__file__), 'assets')
         pyxel.image(STATIC_IMAGES).load(
-                0, 0, os.path.join(assets, 'static.png'))
+                0, 0, os.path.join(assets, 'sprites.png'))
         pyxel.image(BACKGROUND_IMAGE).load(
                 0, 0, os.path.join(assets, 'background.png'))
         pyxel.image(PLAYER_IMAGE).load(

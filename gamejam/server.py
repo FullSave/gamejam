@@ -12,17 +12,17 @@ from .misc import Item
 
 class RAM(Item):
     def __init__(self):
-        self.get_sprite("ram")
+        self.get_sprite("item_ram")
 
 
 class CPU(Item):
     def __init__(self):
-        self.get_sprite("cpu")
+        self.get_sprite("item_cpu")
 
 
 class Server(Item):
     def __init__(self, ram=0, cpu=0):
-        self.get_sprite("server")
+        self.get_sprite("server_%s_%s" % (cpu, ram))
 
         self._ram = int(ram)
         self._cpu = int(cpu)
@@ -52,21 +52,8 @@ class Server(Item):
         return errors
 
     def draw(self, x, y, offset_x=0, offset_y=0):
+        self.get_sprite("server_%s_%s" % (self._cpu, self._ram))
         Item.draw(self, x, y, offset_x, offset_y)
-        if self.is_racked:
-            pyxel.pix(x + offset_x + 1, y + offset_y + 7, 11)
-        if self._cpu >= 1:
-            pyxel.line(x + offset_x + 5, y + offset_y + 7,
-                       x + offset_x + 5, y + offset_y + 8, 13)
-        if self._cpu >= 2:
-            pyxel.line(x + offset_x + 7, y + offset_y + 7,
-                       x + offset_x + 7, y + offset_y + 8, 13)
-        if self._ram >= 1:
-            pyxel.line(x + offset_x + 11, y + offset_y + 7,
-                       x + offset_x + 11, y + offset_y + 8, 3)
-        if self._ram >= 2:
-            pyxel.line(x + offset_x + 13, y + offset_y + 7,
-                       x + offset_x + 13, y + offset_y + 8, 3)
 
     def interact(self, Item):
         """ Interaction with the server

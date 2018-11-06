@@ -61,12 +61,12 @@ class Player(Element):
     def draw(self, offset_x=0, offset_y=0):
         if self._direction == 'top':
             if self._item is not None:
-                self._item.draw(self.x + 8, self.y + 13, offset_x, offset_y)
+                self._item.draw(self.x + 6, self.y + 18, offset_x, offset_y)
             Element.draw(self, offset_x, offset_y)
         else:
             Element.draw(self, offset_x, offset_y)
             if self._item is not None:
-                self._item.draw(self.x + 8, self.y + 13, offset_x, offset_y)
+                self._item.draw(self.x + 6, self.y + 18, offset_x, offset_y)
 
     def move(self, dx, dy):
         # Diagonal smooth move

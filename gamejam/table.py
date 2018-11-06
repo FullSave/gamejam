@@ -15,8 +15,6 @@ class Table(Element):
     def __init__(self, x, y):
         Element.__init__(self, x, y, 32, 32, Hitbox(0, 7, 32, 16))
 
-        self.get_sprite("table")
-
         self._server = None
 
     def draw(self, offset_x=0, offset_y=0):
