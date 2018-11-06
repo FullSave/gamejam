@@ -221,6 +221,6 @@ class Map(object):
         # Show error bubble
         if self._error_bubble_fadeout:
             pyxel.blt(
-                self.offset_x + self._player.x - 5,
+                self.offset_x + self._player.x - 8,
                 self.offset_y + self._player.y - 20,
                 *SpriteSheet().get_sprite("error_bubble").render())
