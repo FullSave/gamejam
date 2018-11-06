@@ -156,7 +156,7 @@ class Map(object):
 
         # Move player
         move_x = move_y = 0
-        speed = 1.5
+        speed = 2
 
         if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W):
             move_y = -speed
