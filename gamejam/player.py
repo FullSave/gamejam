@@ -107,14 +107,14 @@ class Player(Element):
             self.x = new_self.x
             self.y = new_self.y
 
-            if dy < 0:
-                self.update_sprite(direction="top")
-            elif dy > 0:
-                self.update_sprite(direction="bottom")
-            elif dx < 0:
-                self.update_sprite(direction="left")
-            elif dx > 0:
-                self.update_sprite(direction="right")
+        if dy < 0:
+            self.update_sprite(direction="top")
+        elif dy > 0:
+            self.update_sprite(direction="bottom")
+        elif dx < 0:
+            self.update_sprite(direction="left")
+        elif dx > 0:
+            self.update_sprite(direction="right")
 
     def interact(self):
         near_element = None
