@@ -168,17 +168,18 @@ class Map(object):
         self._player.draw(self._offset_x, self._offset_y)
 
         # Draw the part in front of the player if needed
-        if self._player.y < 37:
+        player_y = self.offset_y + self._player.y + self._player.hitbox.y
+        if player_y < self.offset_y + 46:
             for i in range(0, 5):
                 pyxel.blt(
                     self.offset_x + 36 + 32 * i, self.offset_y + 21,
                     *SpriteSheet().get_sprite("racks_%s_top" % (i+6)).render())
-        elif self._player.y < 110:
+        elif player_y < self.offset_y + 110:
             for i in range(0, 5):
                 pyxel.blt(
                     self.offset_x + 36 + 32 * i, self.offset_y + 85,
                     *SpriteSheet().get_sprite("racks_%s_top" % (i+1)).render())
-        elif self._player.y < 167:
+        elif player_y < self.offset_y + 167:
             pyxel.blt(
                 self.offset_x + 0, self.offset_y + 143,
                 *SpriteSheet().get_sprite("wall_left").render())
@@ -188,7 +189,7 @@ class Map(object):
             pyxel.blt(
                 self.offset_x + 152, self.offset_y + 143,
                 *SpriteSheet().get_sprite("wall_right").render())
-        elif self._player.y < 209:
+        elif player_y < self.offset_y + 209:
             pyxel.blt(
                 self.offset_x + 0, self.offset_y + 200,
                 *SpriteSheet().get_sprite("table_left").render())

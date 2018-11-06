@@ -13,7 +13,7 @@ from .server import Server
 
 class Rack(Element):
     def __init__(self, x, y, w, h, number):
-        Element.__init__(self, x, y, w, h, Hitbox(0, 16, w-1, 16))
+        Element.__init__(self, x, y, w, h, Hitbox(0, 25, w-1, 16))
         # XXX self.get_sprite("rack0")
         self.number = number
 
