@@ -52,8 +52,8 @@ class Map(object):
             self._racks.append(Rack(36 + 32 * (i-1), 21, 24, 42, "%s" % (i+5)))
 
         self._providers = [
-            RAMProvider(0, 200),
-            CPUProvider(32, 200),
+            CPUProvider(0, 200),
+            RAMProvider(32, 200),
             CaseProvider(64, 200),
         ]
 

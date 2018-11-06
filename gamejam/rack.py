@@ -25,18 +25,14 @@ class Rack(Element):
         return len(self._servers) >= self._size
 
     def draw(self, offset_x=0, offset_y=0):
-        # TODO Draw servers in racks
-        return
-        Element.draw(self, offset_x, offset_y)
+        # Draw servers in racks
         x = self.x + offset_x
         y = self.y + offset_y + 1
-        pyxel.rect(x, y, x + 6, y + 6, 10)
-        pyxel.text(x+2, y+1, self.number, 0)
 
         # Server draw
         i = 0
         for server in self._servers:
-            server.draw(self.x + 8, self.y - 2 + i * 5, offset_x, offset_y)
+            server.draw(self.x + 2, self.y + 17 + i * 6, offset_x, offset_y)
             i = i + 1
 
     def interact(self, item):

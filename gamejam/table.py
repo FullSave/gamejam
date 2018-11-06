@@ -20,7 +20,7 @@ class Table(Element):
     def draw(self, offset_x=0, offset_y=0):
         # TODO Draw the server at the right position
         if self._server is not None:
-            self._server.draw(self.x + 8, self.y + 3, offset_x, offset_y)
+            self._server.draw(self.x + 3, self.y + 8, offset_x, offset_y)
 
     def interact(self, item):
         """ Interaction with the table
