@@ -88,8 +88,7 @@ class Map(object):
     def score(self):
         return self._score
 
-    @score.setter
-    def score(self, value):
+    def increase_score(self, value):
         self._score += value
 
     @property
