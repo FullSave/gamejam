@@ -28,7 +28,7 @@ LOGO_QUOTES = [
     "So long and thanks for all the fish",
     "E_NOQUOTE",
     "404 Quote not found",
-    "It's not bug..well...maybe it is"
+    "It's not a bug..well...maybe it is"
 ]
 
 
