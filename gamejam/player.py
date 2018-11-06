@@ -73,12 +73,12 @@ class Player(Element):
             if self._item is not None:
                 self._item.draw(self.x + 6, self.y + 18, offset_x, offset_y)
 
-    def move(self, dx, dy):
+    def move(self, dx, dy, diagonal_move=False):
         # Diagonal smooth move
         if dx != 0 and dy != 0:
             # Only move on direction, to allow "slipping" against obstacles
-            self.move(dx / self._diagonal_move, 0)
-            self.move(0, dy / self._diagonal_move)
+            self.move(dx / self._diagonal_move, 0, diagonal_move=True)
+            self.move(0, dy / self._diagonal_move, diagonal_move=True)
             return
 
         new_self = self.copy()
@@ -96,12 +96,15 @@ class Player(Element):
         if new_self.y + self.hitbox.y2 > self._map.height:
             new_self.y = self._map.height - self.hitbox.y2
 
-        if self.x == new_self.x and self.y == new_self.y:
+        if diagonal_move and self.x == new_self.x and self.y == new_self.y:
             return
 
         # Test collisions with all other elements
         for element in self._map.elements:
             if new_self.is_colliding(element):
+                if diagonal_move:
+                    return
+                # else:
                 break
         else:
             self.x = new_self.x
