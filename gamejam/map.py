@@ -38,6 +38,9 @@ class Map(object):
         self._time = START_TIME
         self._prevtime = time.perf_counter()
 
+        # Error bubble
+        self._error_bubble_fadeout = 0
+
         self._walls = [
             # Left wall
             Wall(0, 167, 72, 9),
@@ -134,6 +137,9 @@ class Map(object):
     def elements(self):
         return self._walls + self._racks + self._providers + self._tables + self._trashs
 
+    def show_error_bubble(self):
+        self._error_bubble_fadeout = 120
+
     def update(self):
         t = time.perf_counter()
         delta = t - self._prevtime
@@ -142,6 +148,9 @@ class Map(object):
         if self._time <= 0.0:
             self._time = 0.0
             self._game.complete_map()
+
+        if self._error_bubble_fadeout:
+            self._error_bubble_fadeout -= 1
 
         # Move player
         move_x = move_y = 0
@@ -208,3 +217,10 @@ class Map(object):
             pyxel.blt(
                 self.offset_x + 134, self.offset_y + 204,
                 *SpriteSheet().get_sprite("trash_top").render())
+
+        # Show error bubble
+        if self._error_bubble_fadeout:
+            pyxel.blt(
+                self.offset_x + self._player.x - 5,
+                self.offset_y + self._player.y - 20,
+                *SpriteSheet().get_sprite("error_bubble").render())

@@ -103,8 +103,9 @@ class ScoreBoard(object):
                 self._orders.remove(order)
                 self._orders.append(self.generate_order())
                 break
-        # else:
-        # FIXME: racked a server for free, show a warning
+        else:
+            # racked a server for free, show a warning
+            raise ValueError()
 
     def get_pos(self):
         return (0, 0)
