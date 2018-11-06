@@ -52,7 +52,6 @@ class Order(object):
         pyxel.rect(x+2, y+2, x+52, y+19, 1)
         pyxel.rectb(x+2, y+2, x+52, y+19, 5)
 
-
         #rack no
         pyxel.rect(x+4, y+4, x+12, y+10, 10)
         offset_x = 0
