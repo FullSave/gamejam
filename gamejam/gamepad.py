@@ -8,19 +8,11 @@ class Controller(gamepad.Gamepad):
     def __init__(self):
         gamepad.Gamepad.__init__(self)
 
-        self._prev_states = {
-            'a': False,
-            'b': False,
-            'x': False,
-            'y': False,
-            'tl': False,
-            'tr': False,
-            'select': False,
-            'start': False,
-            'mode': False,
-            'thumbl': False,
-            'thumbr': False
-        }
+        self._prev_states = {}
+
+    def _init_button_map(self, _file):
+        gamepad.Gamepad._init_button_map(self, _file)
+        self._prev_states = {button: False for button in self._button_states}
 
     def is_pressed(self, button):
         try:
