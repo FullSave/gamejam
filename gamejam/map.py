@@ -205,7 +205,8 @@ class Map(object):
         for key in pyxel.__dict__.keys():
             if key.startswith('KEY_') and pyxel.btnp(getattr(pyxel, key)):
                 if key in KEYS_TO_CHAR:
-                    if pyxel.btn(pyxel.KEY_LEFT_SHIFT):
+                    if pyxel.btn(pyxel.KEY_LEFT_SHIFT) or \
+                            pyxel.btn(pyxel.KEY_RIGHT_SHIFT):
                         self._player_name += KEYS_TO_CHAR[key].upper()
                     else:
                         self._player_name += KEYS_TO_CHAR[key]
