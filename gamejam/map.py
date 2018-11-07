@@ -18,7 +18,7 @@ from .providers import RAMProvider, CPUProvider, CaseProvider
 from .table import Table
 from .trash import Trash
 from .scoreboard import ScoreBoard
-from .gamepad import Controller
+from .gamepad import AXIS_RANGE
 
 START_TIME = 60.0  # Time (in seconds)
 
@@ -31,8 +31,6 @@ class Map(object):
         self._width = pyxel.width - offset_x
         self._height = pyxel.height - offset_y
 
-        # Game controller
-        self._controller = Controller()
         self.reset()
 
     def reset(self):
@@ -173,19 +171,27 @@ class Map(object):
         move_x = move_y = 0
         speed = 2
 
-        axs_x = self._controller.get_axis('X')
-        axs_y = self._controller.get_axis('Y')
-        btn_a = self._controller.is_pressed('S')
+        axs_x = self._game.controller.get_axis('X')
+        axs_y = self._game.controller.get_axis('Y')
+        btn_a = self._game.controller.is_pressed('S')
 
-        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W) or axs_y < 0:
+        # Keyboard directions
+        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W):
             move_y = -speed
-        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S) or axs_y > 0:
+        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             move_y = speed
-        if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_A) or axs_x < 0:
+        if pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.KEY_A):
             move_x = -speed
-        elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D) or axs_x > 0:
+        elif pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.KEY_D):
             move_x = speed
 
+        # Gamepad directions
+        if axs_y != 0:
+            move_y = 2 * speed * axs_y / AXIS_RANGE
+        if axs_x != 0:
+            move_x = 2 * speed * axs_x / AXIS_RANGE
+
+        # Action button
         if pyxel.btnp(pyxel.KEY_SPACE) or btn_a:
             self._player.interact()
 
