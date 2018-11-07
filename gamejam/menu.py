@@ -12,7 +12,7 @@ from .leaderboard import LeaderBoard
 from .misc import SpriteSheet, Sprite, STATIC_IMAGES, PLAYER_IMAGE, \
     BACKGROUND_IMAGE
 from .map import Map
-
+from .gamepad import Controller
 
 class Menu(object):
     _width = 224
@@ -113,6 +113,9 @@ class Menu(object):
         self.leaderboard = LeaderBoard(self)
 
         self.current_state = self.leaderboard
+
+        # Game controller
+        self.controller = Controller()
 
         pyxel.run(self.update, self.draw)
 

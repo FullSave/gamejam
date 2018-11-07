@@ -82,7 +82,7 @@ class LeaderBoard(object):
         pyxel.text(pyxel.width/2 - len(text)*FONT_WIDTH/2, pos_y, text, color)
 
     def update(self):
-        if pyxel.btnp(pyxel.KEY_SPACE):
+        if pyxel.btnp(pyxel.KEY_SPACE) or self._game.controller.is_pressed('ST'):
             self._game.start_map()
 
     def draw_ranking(self):
@@ -118,7 +118,7 @@ class LeaderBoard(object):
         else:
             self.draw_logo()
 
-        self.centered_text(228, "Press SPACE to continue...", TITLE_COLOR)
+        self.centered_text(228, "Press SPACE or START to continue...", TITLE_COLOR)
 
         self._screen_counter += 1
         if self._screen_counter >= 600:
