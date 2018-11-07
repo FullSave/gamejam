@@ -173,9 +173,9 @@ class Map(object):
         move_x = move_y = 0
         speed = 2
 
-        axs_x = self._controller.get_axis('hat0x')
-        axs_y = self._controller.get_axis('hat0y')
-        btn_a = self._controller.is_pressed('a')
+        axs_x = self._controller.get_axis('X')
+        axs_y = self._controller.get_axis('Y')
+        btn_a = self._controller.is_pressed('S')
 
         if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W) or axs_y < 0:
             move_y = -speed
