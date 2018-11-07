@@ -14,3 +14,9 @@ After that, install the other requirements.
 ```
 pip install -r requirements
 ```
+
+Then, run the game as a python module.
+
+```
+python -m gamejam
+```
