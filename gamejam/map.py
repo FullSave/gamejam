@@ -8,7 +8,7 @@ Copyrights 2018 by Fullsave
 
 import time
 import pyxel
-from pyxel.constants import FONT_WIDTH
+from pyxel.ui.constants import FONT_WIDTH
 
 from .misc import BACKGROUND_IMAGE, SpriteSheet, Hitbox, KEYS_TO_CHAR
 from .player import Player

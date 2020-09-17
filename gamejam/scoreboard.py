@@ -8,7 +8,7 @@ Copyrights 2018 by Fullsave
 
 import pyxel
 import random
-from pyxel.constants import FONT_WIDTH, FONT_HEIGHT
+from pyxel.ui.constants import FONT_WIDTH, FONT_HEIGHT
 from .server import Server, RAM, CPU
 from .rack import Rack
 from .misc import SpriteSheet

@@ -10,7 +10,7 @@ import json
 import os.path
 import pyxel
 import random
-from pyxel.constants import FONT_WIDTH
+from pyxel.ui.constants import FONT_WIDTH
 
 from .misc import SpriteSheet
 
